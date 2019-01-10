@@ -1,5 +1,5 @@
 # Site settings
-baseURL = "http://kyrandale.com/"
+#baseURL = "http://kyrandale.com/"
 languageCode = "en-us"
 title = "Kyran Dale"
 theme = "forty"
