@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>To the Web and Beyond</title>
+
+		<meta name="description" content="To the Web and Beyond">
+		<meta name="author" content="Kyran Dale">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="lib/css/kgd.css">
+                
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+                        
+		</script>
+
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>To the Web and Beyond</h1>
+				        <h3>PyData-London 2016</h3>
+					<p>
+						<small>Created by <a href="http://kyrandale.com">Kyran Dale</a> / <a href="http://twitter.com/kyran_dale">@kyran_dale</a></small>
+					</p>
+				</section>
+
+                                <section>
+                                  <img src="media/images/pyjsbook_cover.png" class="" alt="" style="" height='550px' />
+                                </section>
+
+                                <section>
+                                  <h2>Beyond</h2>
+                                  <img src="media/images/totheweb.png" class="" alt="" style="" />
+                                </section>
+                                
+                                <section>
+                                  <h2>Beyond</h2>
+                                  <img src="media/images/tothewebwithlove.png" class="" alt="" style="" />
+                                </section>
+
+                                <section>
+                                  <h2>Beyond</h2>
+                                  <img src="media/images/tothewebandbeyond.png" class="" alt="" style="" />
+                                </section>
+
+                                <section>
+                                  <h2>Beyond</h2>
+                                  <img src="media/images/oculus.jpeg" alt="" />
+                                </section>
+
+                                <section>
+                                  <h2>Beyond</h2>
+                                  <h3>Leave Python for a year</h3>
+                                  <pre class='small-code'><code data-trim class='python'>
+import asyncio
+
+async def http_get(domain):
+    reader, writer = await asyncio.open_connection(domain, 80)
+
+    writer.write(b'\r\n'.join([
+        b'GET / HTTP/1.1',
+        b'Host: %b' % domain.encode('latin-1'),
+        b'Connection: close',
+        b'', b''
+    ]))
+
+    async for line in reader:
+        print('>>>', line)
+
+    writer.close()
+
+loop = asyncio.get_event_loop()
+try:
+    loop.run_until_complete(http_get('example.com'))
+finally:
+    loop.close()
+
+                                  </code></pre>
+                                </section>
+
+                                <section>
+                                  <h2>Beyond</h2>
+                                  <h3>Leave JavaScript for a week</h3>
+                                  <pre class='small-code'><code data-trim class='js'>
+class Person {
+  constructor(name) { // constructors
+    this.name = name;
+  }
+  // ...
+}
+
+class Citizen extends Person { // inheritance 
+  constructor(name, nationality) {
+    super(name); // call parent constructor with super
+    this.nationality = nationality; 
+  }
+  // ...
+}
+
+let x = [0, 1, 2, 3];
+x.map(x => console.log(x * x)); // fat arrow function
+
+async function updateData(fname){ // async + await
+  try{
+    let data = await getJSON(fname); // using a Promise
+    updateChart(data);
+    // ... 
+  } catch (err) {
+  // ...
+                                  </code></pre>
+                                </section>
+
+                                <section>
+                                  <h2>Beyond</h2>
+                                  <h3>JavaScript's Synactic Sugar</h3>
+                                  <ul>
+                                    <li>Modules</li>
+                                    <li>Classes</li>
+                                    <li>Promises + async</li>
+                                    <li>Generators</li>
+                                    <li>Block scoping with let</li>
+                                    <li>Etc..</li>
+                                  </ul>
+                                </section>
+
+                                <section>
+                                  <h2>Why Dataviz Must Go To the Web</h2>
+                                  <ul class='big-message'>
+                                    <li class='fragment'>Communication</li>
+                                    <li class='fragment'>Distribution</li>
+                                    <li class='fragment'>Convenience</li>
+                                  </ul>
+                                </section>
+
+                                <!-- <section> -->
+                                <!--   <h2>Why Dataviz Must Go To the Web</h2> -->
+                                <!--   <ul> -->
+                                <!--     <li>Communication</li> -->
+                                <!--     <li>Distribution</li> -->
+                                <!--   </ul> -->
+                                <!-- </section> -->
+
+                               <section>
+                                  <h2>Why Dataviz Must Go To the Web</h2>
+                                  <p>The humble URL as a token of exchange.</p>
+                                  <ul>
+                                    <li>Cloud servers in a few clicks (AWS, Heroku, DigitalOcean etc.)</li>
+                                    <li>JFiddle, JSBin et. al. - demo live JavaScript visualisations.</li>
+                                    <li>http://blockbuilder.org/ - Github gists to D3 visualisations (11,000 examples!).</li>
+                                    <li>Rich ecosystem, skills freely traded, standards rising inexorably.</li>
+                                    <li>Barriers to entry dropping all the time...</li>
+                                  </ul>
+                               </section>
+
+
+                               <section>
+                                  <h2>Nobody Likes Me, Everybody Hates Me...</h2>
+                                 <h3>Coming to terms with JavaScript</h3>
+                                 <img src="media/images/elephant.png" class="" alt="" style="" />
+                               </section>
+
+
+ 
+                                <section>
+                                  <h2>JavaScript's Development</h2>
+                                  <h3>In the Beginning was jQuery</h3>
+                                  <pre><code data-trim class='js'>
+var btns = document.querySelectorAll('button');
+
+btns[0].addEventListener('click', function(){ 
+// ...
+});
+
+// with jQuery
+$('button').click( function(){ // ...
+                                  </code></pre>
+                                </section>
+
+                                <section>
+                                  <h2>JavaScript's Development</h2>
+                                  <h3>In the Beginning was jQuery</h3>
+                                  <ul>
+                                    <li>Rag-bag of DOM-hacks</li>
+                                    <li>Nice utility libraries like ajax (XMLHttpRequest)</li>
+                                    <li>Tendency to kitchen-sinkery, kinda messy/hacky</li>
+                                  </ul>
+                                </section>
+
+                                <section>
+                                  <h2>JavaScript's Development</h2>
+                                  <ul>
+                                    <li>JS a 'toy' language.</li>
+                                    <li>Ugly, kludgy syntax</li>
+                                    <li>Slow interpreter</li>
+                                    <li>Generally small code-bases</li>
+                                    <li>Difficult to scale</li>
+                                  </ul>
+                                </section>
+
+                                <section>
+                                  <h2>JavaScript's Development</h2>
+                                  <h3>No Imports</h3>
+                                  <pre><code data-trim class='html'>
+<!DOCTYPE html>
+<meta charset="utf-8">
+&lt;body>
+  &lt;-- ... -->  
+  &lt;script src="//code.jquery.com/jquery-1.11.0.min.js">&lt;/script>
+  &lt;script src="http://d3js.org/d3.v3.min.js">&lt;/script>
+&lt;/body>
+                                  </code></pre>
+                                </section>
+
+                                <section>
+                                  <h2>JavaScript's Development</h2>
+                                  <h3>The bad and the ugly</h3>
+                                  <pre><code data-trim class='js'>
+function foo(a){
+  a = typeof a !=== 'undefined' ? a : 42;
+// ...
+}
+                                  </code></pre>
+                                </section>
+
+                                <section>
+                                  <h2>JavaScript's Development</h2>
+                                  <h3>The bad and the ugly</h3>
+                                  <pre><code data-trim class='js'>
+var names = ['Tom', 'Dick', 'Harriet'];
+var l = names.length;
+for (var i = 0; i < l; i++) {
+    console.log(names[i]);
+}
+                                  </code></pre>
+                                </section>
+
+                                <section>
+                                  <h2>ECMAScript 2016</h2>
+                                  <h3>Better all the time</h3>
+                                  <ul>
+                                    <li>Modules!!, e.g. `import defaultMember from "module-name";'</li>
+                                    <li>Default parameters!, e.g. `def foo(bar, baz=10){...'</li>
+                                    <li>No more for loops, e.g. `[1, 2, 3].forEach(d => console.log(d));'</li>
+                                  </ul>
+                                </section>
+                                
+                                <section>
+                                  <h2>Shifting Bits</h2>
+                                  <h3>JS smokes Python for speed</h3>
+                                  <img src="media/images/JSsmokesPython.png" class="" alt="" style="" />
+                                </section>
+                                
+                                <section>
+                                  <h2>JavaScript's Development</h2>
+                                  <p>If JavaScript is good and getting better why bother with Python?</p>
+                                </section>
+
+                                <section>
+                                  <h2>JavaScript's Development</h2>
+                                  <p>Nothing to remotely compare in JS ecosystem with Python's data-processing stack. NumPy, SciPy, Pandas, scikit-learn etc. are all in different league to anything JS has to offer. Data-processing with JS is currently a pain.</p>
+                                </section>
+
+                                <section>
+                                  <h2>Dataviz Toolchain</h2>
+                                  <img src="media/images/toolchain.png" class="" alt="" style="" />
+                                </section>
+
+                                <section>
+                                  <h2>Web-ward Options for Pythonistas</h2>
+                                  <ul>
+                                    <li>Jupyter (IPython) notebook with embedded charts.</li>
+                                    <li>Plotly, Bokeh et. al.</li>
+                                    <li>Vega (with Vincent) visualisation grammar.</li>
+                                    <li>Bite the JavaScript bullet (D3 et. al.)...</li>
+                                  </ul>
+                                </section>
+
+                                <section>
+                                  <h2>Embedded Charts with Jupyter Notebook</h2>
+                                  <img src="media/images/jupyter.png" class="" alt="" style="" height='500px'/>
+                                </section>
+
+                                <section data-background-iframe='http://bokeh.pydata.org/en/latest/'>
+                                </section>
+
+                                <section>
+                                  <h2>Outside the JavaScript Workflow</h2>
+                                  <ul>
+                                    <li>Limits of transpiled Python to JS.</li>
+                                    <li>Powerful JS development tools hard to apply.</li>
+                                    <li>Indirection will add to debugging frustrations.</li>
+                                    <li>Reliant on JS experts and request tickets.</li>
+                                  </ul>
+                                </section>
+
+                                <section>
+                                  <h2>Hacks We Have Known</h2>
+                                  <h3>Empowerment close to the metal</h3>
+                                  <video controls src="media/movies/govapp_labelclash.mp4" style='max-height:480px'></video>
+                                </section>
+
+                                <section>
+                                  <h2>Hacks We Have Known</h2>
+                                  <h3>Empowerment close to the metal</h3>
+                                  <video controls src="media/movies/govapp_nolabelclash.mp4" style='max-height:480px'></video>
+                                </section>
+
+                               <section>
+                                 <h2>Hacks We Have Known</h2>
+                                  <h3>Empowerment close to the metal</h3>
+                                 <pre class='smaller-code'><code data-trim class='js'>
+var fixLabels = function() {
+    labelPos.sort(function(a, b) {
+        return a.pos > b.pos;
+    }); 
+
+    var labelToPos = {};
+    labelToPos[labelPos[0].name] = labelPos[0].pos;
+    
+    labelPos.forEach(function(d,i){
+        if(i === labelPos.length-1){return;}
+        var dist = labelPos[i+1].pos - d.pos;
+        if(dist < MIN_LABEL_GAP){
+            labelPos[i+1].pos = d.pos + MIN_LABEL_GAP;
+        }
+    }); 
+
+    labelPos.forEach(function(d) {
+        labelToPos[d.name] = d.pos;
+    });
+
+    d3.selectAll(".line-label")
+        .transition()
+        .duration(1000)
+        .attr("transform", function(d) {
+            var yPos = labelToPos[sanitizeName(d.name)];
+            return "translate(" + x.range()[1] + ',' + yPos + ")"; });
+        
+};
+ </code></pre>
+                               </section>
+ 
+
+                                <section data-background-iframe='demos/nobel_viz/index.html'>
+                                </section>
+                                
+                                <section data-background-iframe='https://www.sanddance.ms'>
+                                </section>
+
+
+                                <section>
+                                  <h2>Getting in the Game</h2>
+                                  <h3>Simplify your life</h3>
+                                  <ul>
+                                    <li>Avoid frameworks like Angular, React (Flux), Meteor etc..  </li>
+                                    <li>Innoculate against JS Toolitus - Grunt, Gulp, Yeoman, Bower etc..  </li>
+                                    <li>Learn the basic HTML elements, &lt;div> content blocks, &lt;select> selectors etc..</li>
+                                    <li>Invest some time learning Scalable Vector Graphics (SVG) elements.</li>
+                                    <li>Don't worry about LESS or SASS for now - vanilla CSS is fine.</li>
+                                    <li>In fact, vanilla everything is a pretty good place to start.</li>
+                                  </ul>
+                                </section>
+
+                                <section>
+                                  <h2>Your Webdev Tools</h2>
+                                  <h3>Decent editor, browser developer tools (Chrome by a mile), console</h3>
+                                  <img src="media/images/webdevtools.png" class="" alt="" style="" height='450px'/>
+                                </section>
+
+                                <section>
+                                  <h2>The Single-page App</h2>
+                                  <h3></h3>
+                                  <pre><code data-trim>
+nobel_viz
+├── config.py
+├── nobel_viz.py
+├── notes.md
+├── static
+│   ├── css
+│   ├── data
+│   ├── images
+│   ├── js
+│   └── lib
+└── templates
+    └── index.html <--- entry point for Single-page app
+                                  </code></pre>
+                                </section>
+
+                                <section>
+                                  <h2>Design Your Visualisation</h2>
+                                  <img src="media/images/nobelvizdims.png" class="" alt="" style="" />
+                                </section>
+                                
+                                <section>
+                                  <h2>The HTML backbone</h2>
+                                  <h3>index.html</h3>
+                                  <pre class='smaller-code'><code data-trim class='html'>
+<!DOCTYPE html>
+<meta charset="utf-8">
+&lt;link rel="stylesheet" href="style.css" type="" media="screen" />
+&lt;body>
+  
+  <div id="nobel-ui"></div>
+  <div id='chart-holder' class='_dev'>
+    <div id="nobel-time"></div>
+    <div id="nobel-map"></div>
+    <div id="nobel-list">
+      <h2>Selected winners</h2>
+      <table>
+        <thead>
+          <tr><th id='year'>Year</th><th id='category'>Category</th><th id='name'>Name</th></tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+    <div id="nobel-winner">
+      <div id="picbox"></div>
+      <div id='title'></div>
+      <div id='infobox'></div>
+      <div id='biobox'></div>
+      <div id='readmore'><a href='#'>Read more at Wikipedia</a></div>
+    </div>
+    <div id="nobel-bar"></div>
+  </div>
+  <-- ... -->
+  <-- JAVASCRIPT FILES -->
+&lt;/body>
+    
+                                  </code></pre>
+                                </section>
+
+                                <section>
+                                  <h2>A Little CSS...</h2>
+                                  <h3></h3>
+                                  <pre class='small-code'><code data-trim class='css'>
+// ...
+                                      
+#nobel-map, #nobel-winner, #nobel-bar, #nobel-time, #nobel-list{
+    position:absolute;
+}
+
+#nobel-time{
+    top:0;
+    height:150px;
+    width:100%;
+}
+
+#nobel-map{
+    background:azure;
+    top:160px;
+    width:700px;
+    height:350px;
+}
+
+// ...
+
+
+                                  </code></pre>
+                                </section>
+
+                                <section>
+                                  <h2>Program Your Visualisation</h2>
+                                  <pre class='small-code'><code data-trim class='js'>
+var query_winners = 'winners?projection=' +
+    JSON.stringify( {"mini_bio":0, "bio_image":0} );
+
+var q = queue()
+    .defer(d3.json, "static/data/world-110m.json")
+    .defer(d3.csv, "static/data/world-country-names-nobel.csv")
+    .defer(d3.json, "static/data/winning_country_data.json")
+    .defer(nbviz.getDataFromAPI, query_winners)
+    .await(ready);
+
+function ready(error, worldMap, countryNames, countryData, winnersData) {
+// ... COOL DATA-DRIVEN VISUALISATION
+}
+                                  </code></pre>
+                                </section>
+
+
+                                <section>
+                                  <h2>Delivering the Data</h2>
+                                  <h3>JavaScript Object Notation</h3>
+                                  <img src="media/images/json-glue.png" class="" alt="" style="" />
+                                </section>
+                                
+                                <section>
+                                  <h2>An Array of JSON Objects</h2>
+                                  <h3></h3>
+                                  <pre><code data-trim>
+[
+  {
+    "category": "Physiology or Medicine",
+    "country": "Argentina",
+    "date_of_birth": "1927-10-08T00:00:00.000Z",
+    "date_of_death": "2002-03-24T00:00:00.000Z",
+    "gender": "male",
+    "link": "http:\/\/en.wikipedia.org\/wiki\/C%C3%A9sar_Milstein",
+    "name": "C\u00e9sar Milstein",
+    "place_of_birth": "Bah\u00eda Blanca ,  Argentina",
+    "place_of_death": "Cambridge , England",
+    "text": "C\u00e9sar Milstein , Physiology or Medicine, 1984",
+    "year": 1984,
+    "award_age": 57
+  }
+  ...
+]
+                                  </code></pre>
+                                </section>
+
+                                <section>
+                                  <h2>Cloud Based RESTful API </h2>
+                                  <h3></h3>
+                                  <img src="media/images/restapi.png" class="" alt="" style="" />
+                                </section>
+
+
+                                <section>
+                                  <h2>Creating a Cloud-based RESTful API with Heroku and Python-EVE</h2>
+                                  <h3>Configure Python-EVE RESTful API with settings.py</h3>
+                                  <pre class='smaller-code'><code data-trim>
+# settings.py
+import os
+
+# We want to seamlessy run our API both locally and on Heroku. If running on
+# Heroku, sensible DB connection settings are stored in environment variables.
+MONGO_HOST = os.environ.get('MONGO_HOST', 'localhost')
+MONGO_PORT = os.environ.get('MONGO_PORT', 27017)
+MONGO_USERNAME = os.environ.get('MONGO_USERNAME', 'user')
+MONGO_PASSWORD = os.environ.get('MONGO_PASSWORD', 'user')
+MONGO_DBNAME = os.environ.get('MONGO_DBNAME', 'nobel_prize')
+
+X_DOMAINS = '*'
+HATEOAS = False
+PAGINATION = False
+
+URL_PREFIX = 'api'
+DOMAIN = {'winners_full':{
+    'item_title': 'winners',
+    'schema':{
+        'country':{'type':'string'},
+        'category':{'type':'string'},
+        'name':{'type':'string'}, 
+        'year':{'type': 'integer'},
+        'gender':{'type':'string'},
+        'mini_bio':{'type':'string'},
+        'bio_image':{'type':'string'}
+        },
+    'url':'winners'
+}}
+                                  </code></pre>
+                                </section>
+
+                                <section>
+                                  <h2>Creating a Cloud-based RESTful API with Heroku and Python-EVE</h2>
+                                  <h3>Flask-based EVE server</h3>
+                                  <pre><code data-trim>
+# server_eve.py
+from eve import Eve
+
+app = Eve()
+
+if __name__=='__main__':
+    app.run(debug=True)
+                                  </code></pre>
+                                </section>
+                                
+                                <section>
+                                  <h2>Creating a Cloud-based RESTful API with Heroku and Python-EVE</h2>
+                                  <h3>Necessary Heroku Files</h3>
+                                  <h4>Procfile</h4>
+                                  <pre><code data-trim>
+web: python server_eve.py
+                                  </code></pre>
+                                  <h4>requirements.txt</h4>
+                                  <pre><code data-trim>
+Eve==0.6.1
+                                  </code></pre>
+                                </section>
+
+                                <section>
+                                  <h2>Creating a Cloud-based RESTful API with Heroku and Python-EVE</h2>
+                                  <pre class='smaller-still-code'><code data-trim>
+$ git init
+Initialised empty Git repository in /home/kyran/workspace/docs/pyjsbook/dataviz-with-py
+thon-and-js/nobel_viz/api/.git/
+$ git add -A
+$ git commit -m 'Initial Commit'
+[master (root-commit) 340ced1] Initial Commit
+ 4 files changed, 47 insertions(+)
+ create mode 100644 Procfile
+ create mode 100644 requirements.txt
+ create mode 100644 server_eve.py
+ create mode 100644 settings.py
+
+$ heroku apps:create eve-heroku
+Creating ⬢ eve-heroku... done
+https://eve-heroku.herokuapp.com/ | https://git.heroku.com/eve-heroku.git
+
+$ heroku addons:create mongolab                          
+Creating mongolab-adjacent-30486... done, (free)
+Adding mongolab-adjacent-30486 to eve-heroku... done
+Setting MONGODB_URI and restarting eve-heroku... done, v3
+Welcome to mLab.  Your new subscription is being created and will be available shortly.
+  Please consult the mLab Add-on Admin UI to check on its progress.
+Use `heroku addons:docs mongolab` to view documentation.
+
+$ git push heroku master
+Counting objects: 6, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (6/6), 1.02 KiB | 0 bytes/s, done.
+...
+remote:        https://eve-heroku.herokuapp.com/ deployed to Heroku
+remote: 
+remote: Verifying deploy... done.
+To https://git.heroku.com/eve-heroku.git
+
+
+                                  </code></pre>
+                                </section>
+
+
+                                <section>
+                                  <h2>Testing the Data API</h2>
+                                  <h3>Grabbing all French Nobel-prize winners</h3>
+                                  <pre class='small-code'><code data-trim>
+curl -g http://eve-heroku.herokuapp.com/api/winners\?where\=\{\"country\":\"France\"\}
+{
+  "_items": [
+    {
+      "category": "Chemistry",
+      "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+      "name": "Ir\u00e8ne Joliot-Curie",
+      "gender": "female",
+      "year": 1935,
+      "_links": { <1>
+        "self": {
+          "href": "winners\/568d03a826a7113f2cc0a86a",
+          "title": "Winner"
+        }
+      },
+      "country": "France",
+      "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+      "_id": "568d03a826a7113f2cc0a86a",
+      "_etag": "dcaff67c8e9ab22a6830fec9313ed61c8a1c8ffc"
+    },
+    ...
+    "_meta": {
+    "max_results": 25, <2>
+    "total": 60,
+    "page": 1
+  }
+}    
+                                  </code></pre>
+                                </section>
+
+                                
+                                
+                                <section>
+                                  <h2>Conclusion</h2>
+                                  <p>Python and JavaScript are the most powerful data-visualisation stack out there. Using both to their full potential opens up a new realm of dataviz possibilities. </br> Robust data web-APIs can be thrown together in a few lines and deployed with relative ease (and getting easier all the time). Minimal webdev templates then allow you to focus your creative energies on what you do best - turning data in engaging, interactive visualisations.</p>
+                                </section>
+
+
+                                <section>
+                                  <img src="media/images/pyjsbook_cover.png" class="" alt="" style="" height='550px' />
+                                </section>
+
+                
+
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+                <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+                        Reveal.addEventListener('slidechanged', function(event) {               
+                        if($(event.currentSlide).attr('data-background-iframe')) {
+                        $('.reveal > .backgrounds').css('z-index', 1);
+                } else {
+                $('.reveal > .backgrounds').css('z-index', 0);
+                }                  
+                });
+		</script>
+
+	</body>
+</html>

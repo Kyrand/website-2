@@ -1,0 +1,19 @@
+{{ define "main" }}
+
+{{ "<!-- Main -->" | safeHTML }}
+<div id="main-post" class="alt">
+
+  <article id="one" class="post-container">
+    <div class="inner">
+      {{ partial "single-content.html" . }}
+    </div>
+  </article>
+
+
+  {{ "<!-- Disqus Inject -->" | safeHTML }}
+  {{ if .Site.DisqusShortname }}
+  {{ partial "disqus.html" . }}
+  {{ end }}
+</div>
+
+{{ end }}

@@ -1,0 +1,27 @@
+<div class="post">
+
+  <header class="post-major">
+    <h1>{{ .Title}}</h1>
+  </header>
+  {{ if .Params.image }}
+  <!-- <span class="image main"><img src="{{ .Site.Params.baseURL }}/img/{{ .Section }}/{{ .Params.image }}" alt="" /></span> -->
+  <div class="image main"><img src="{{ .Params.image }}" alt="" /></div>
+  {{ end }}
+  <!-- <h1>{{ .Title }}</h1> -->
+  {{ partial "post-meta" . }}
+
+  <!-- <div class="share-icons">
+       {{ partial "share-icons" . }}
+       </div> -->
+
+  <div class="mt-4 mb-4 main-content">
+    {{ .Content }}
+
+    <div class="share-icons d-flex justify-content-center d-print-none">
+      {{ partial "share-icons" . }}
+    </div>
+  </div>
+
+  {{ template "_internal/disqus.html" . }}
+</div>
+{{ partial "sidebar" . }}

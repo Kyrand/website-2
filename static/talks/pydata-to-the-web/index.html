@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>reveal.js - The HTML Presentation Framework</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+
+    <!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h1>Getting Your Python Data onto a Browser</h1>
+          <h4>PyData London 1st July 2014</h4>
+          <p>
+            A short, practical guide to making the leap from OS based visualizations to something you can share with the world at the click of a button. Starring Python, Javascript and D3.
+          </p>
+            <i><a href="http://kyrandale.com">Kyran Dale</a> / <a href="http://kyrandale.com">http://kyrandale.com</a></i>
+        </section>
+
+        <section>
+          <h2>Talk Structure</h2>
+          <ul>
+           <li>Brief introduction to main themes and a few tips and sanity checks</li>
+           <li>The form of data (JSON when possible)</li>
+           <li>A 'Hello World' for beginning Python+JS development</li>
+           <li>Better ways of getting the data from Python to Javascript</li>
+           <li>What to do with it when you get there...</li>
+           <li>... a little D3 intro</li>
+           <li>Suggestion for further explorations</li>
+           <li>Summation and some useful resources</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Intro</h2>
+          <p>This is a compliment to previous <a href="http://kyrandale.com/talks/pydata">PyData talk</a> with a practical edge. Anyone made quesy by the sight of code should leave the room now.<br />
+            The stress will be on developing some best-practices and getting a firm foundation in place for building Python + Javascript visualizations.<br />
+            Some very cool initiatives at the moment like the D3-based <a href="https://github.com/jakevdp/mpld3">mpld3</a> (see IPython Notebook), <a href="http://vincent.readthedocs.org/en/latest/">Vincent</a> (Vega-based) and  <a href="https://github.com/mikedewar/d3py">d3py</a>. But this talk is about building from ground up - once you have that ability most intermediate solutions will feel restrictive. Novel, creative data-visualization is a key aim here.
+          </p>
+        </section>
+
+        <!-- <section> -->
+        <!--   <h2>Coul Libraries We Have Known</h2> -->
+        <!--   <h3>D3, the JS Visualization Powerhouse (+Vega)</h3> -->
+        <!--   <video contruls src="media/videos/d3.webm" style='max-height:80%'> -->
+        <!--   </video> -->
+        <!-- </section> -->
+        
+        <section>
+          <h2>Why now is a good time to be doing this</h2>
+          <ul>
+            <li>If you are into data you are into data-visualization</li>
+            <li>Relatively, browsers are steroid-enhanced, 500 pound gorillas compared with yesteryear</li>
+            <li>Javascript engines now powerful enough to hack the maths</li>
+            <li>Some wonderful, mature libraries out there, D3 being a standout</li>
+            <li>People's expectations re. web-visualization are increasing - pre-rendered pngs don't hack it anymore</li>
+             <li>It's fun... honestly</li>
+          </ul>
+        </section>
+        
+        <section>
+          <h2>Cool, random discovery for the day</h2>
+          <h3>Courtesy of DLMF-NIST</h3>
+          <video controls src="images/theta_webgl.webm" style='max-height:580px'></video>
+        </section>
+
+        <section>
+          <h2>A few sanity checks for Javascript</h2>
+          <ul>
+            <li>Avoid all frameworks early on</li>
+            <li>Avoid Coffescript et. al. by same token</li>
+            <li>Read Crockford's 'Javascript: the good parts'</li>
+            <li>Being solid with JS will help in long run</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>The best advice you'll ever receive</h2>
+          <h3>Good editor + linter = relative joy</h2>
+          <img src="images/get_a_linter.png" class="" alt="" />
+        </section>
+
+        <section>
+          <h2>Tips for web data-visualization</h2>
+          <ul>
+            <li>Do as much data pre-processing as possible in Python</li>
+            <li>With D3 et. al. start simply but try and understand profoundly</li>
+            <li>Know enough about the <b>D</b>ocument <b>O</b>bject <b>M</b>odel to be dangerous</li>
+            <li>Think hard about the form data will take (e.g. Micha's Rule)</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Micha's Rule: Don't store data in keys of a JSON-blob</h2>
+          <h4>D3 friendly</h4>
+          <pre><code data-trim class='js'>
+data = [
+    {'title': 'foo', 'message': 'bar', (...)},
+    {'title': 'baz', 'message': 'qux', (...)}, ... 
+]
+          </code></pre>
+          <h4>Avoid this sort of thing</h4>
+          <pre><code data-trim class='js'>
+data = {
+    'foo': {'message': 'bar', (...)},
+    'baz':{'message': 'qux', (...)}, ...
+}
+          </code></pre>
+        </section>
+
+        
+        <section>
+          <h2>JSON is the glue between Python and JS</h2>
+          <img src='images/json-glue.png' />
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## JSON for data delivery
+            - J Java...
+            - S ...script
+            - O Object
+            - N Notation
+          </script>
+        </section>
+
+        <section>
+          <h2>JSON for data delivery</h2>
+          <h3>Example</h3>
+
+          <pre><code>
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Product",
+    "description": "A product from Acme's catalog",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "The unique identifier for a product",
+            "type": "integer"
+        }
+    },
+    "required": ["id"]
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Python's json module</h2>
+          <pre><code data-trim class='py'>
+#data.json:
+#{"foo": [1, 2, 3], "baa": {"Hello": "World!"}
+In [1]  import json
+# load data from a file
+In [2]  with open("data.json") as json_file:
+            json_data = json.load(json_file)
+        json_data
+Out[3]: {u'baa': {u'Hello': u'World!'}, u'foo': [1, 2, 3]}
+# or from a string
+In [4]  jdata = json.load('{"foo": [1, 2, 3], "baa": {"Hello": "World!"}')
+In [5]: jdata
+Out[6]: {u'baa': {u'Hello': u'World!'}, u'foo': [1, 2, 3]}
+# and equivalent json.dump and json.dumps
+          </code></pre>
+        </section>
+        
+        <section>
+          <h2>PyData to Javascript: A Hello World</h2>
+          <img src="images/files_helloworld.png" class="" alt="" style='max-height: 80%' />
+          <!-- <p>server.py</p> -->
+          <pre><code data-trim class='py smallfont-80'>
+# server.py
+import json
+
+
+data = [{'title':'Hello World!', 'body':"Your big, blue, roundness impresses us all."}]
+json.dump(data, open('demo_data.json', 'w'))
+          </code></pre>
+          <!-- <p>index.html</p> -->
+          <pre><code data-trim class='html smallfont-80'>
+<!-- index.html -->
+&lt;!DOCTYPE html&gt;
+<meta charset="utf-8">
+<style>
+  h1 {color:red}
+</style>
+
+<div id='demo'></div>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+  d3.json('demo_data.json', function(error, data){
+      var demo = d3.select('#demo'),
+      messages = demo.selectAll('messages').data(data).enter();
+      messages.append('h1').html(function(d){ return d.title;});
+      messages.append('p').html(function(d){return d.body;});
+  });
+</script>
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Running a development server</h2>
+          <p>The easy way, from the project directory just type and enter</p>
+          <pre><code class="bash" data-trim>
+              $ python -m SimpleHTTPServer
+            </code></pre>
+          <p>Open the default address in your browser and hey presto!</p>
+          <img src="images/helloworld.png" class="" alt="" />
+          <p>Note: node's http-server is faster and can handle streaming video etc.. </p>
+          <pre><code class="bash" data-trim>
+$ npm install http-server -g; http-server -p 8000             </code></pre>
+          <p>
+          A trivial data pipeline from Python -> JSON -> Javascript but most data visualization work will be increasingly sophisticated variations on this theme.
+           </p>
+        </section>
+
+        <section>
+          <h2>A little organization</h2>
+          <p>
+            Best-practice 101, getting those files organized early will save a lot of time in the long run.
+          </p>
+          <img src="images/files_bestpractice.png" class="" alt="" />
+        </section>
+
+        <section>
+          <h2>Adjust the index.html entry-point</h2>
+          <pre><code class="py smallfont-80" data-trim>
+<!DOCTYPE html>
+<meta charset="utf-8">
+&lt;link rel="stylesheet" href="static/css/style.css">
+
+<svg id="chart"></svg>
+<div id='buttons'></div>
+<h4>json data from the '/api/&lt;id&gt;' call</h4> 
+<div id='data'></div>
+
+&lt;script src="http://d3js.org/d3.v3.min.js">&lt;/script>
+&lt;script src="static/js/simplechart.js">&lt;/script>
+&lt;script src="static/js/script.js">&lt;/script>
+            </code></pre>
+        </section>
+
+
+        <section>
+          <h2>A little Flask-based RESTful API</h2>
+          <pre><code class="py smallfont-80" data-trim>
+#!flask/bin/python
+from flask import Flask, make_response
+import pandas as pd
+
+app = Flask(__name__)
+
+dummy_data = {
+    0: pd.DataFrame({'name':['A', 'B', 'C', 'D'], 'value':[4, 2, 8, 5]}),
+    1: pd.DataFrame({'name':['A', 'B', 'C'], 'value':[13, 29, 9]}),
+    2: pd.DataFrame({'name':['A', 'B', 'C','D', 'E', 'F'], 'value':[3, 12, 9, 21, 15, 7]})
+    }
+
+@app.route('/')
+def index():
+    return make_response(open('index.html').read())
+
+
+@app.route('/api/&lt;int:id&gt;')
+def api(id):
+    return make_response(dummy_data[id].to_json(orient='records'))
+
+
+if __name__ == '__main__':
+    app.run(debug = True)
+            </code></pre>
+        </section>
+
+        <section>
+          <h2>Charts Jim, but not as we know them</h2>
+          <ul>
+            <li>D3 was inspired by Wilkinson's classic text 'Grammar of Graphics', as was ggplot</li>
+            <li>Allows full control over all elements of visualization</li>
+            <li>The pay-off for all this expressive power is a steep (some would say vertiginous) learning curve</li>
+            <li>But basic elements fairly simple - important to understand them well...</li>
+          </ul>
+        </section>
+        
+       <section>
+         <h2>A Simple Barchart</h2>
+         <iframe width='800px' height='600px' src="demos/simplechart/index.html"></iframe>
+       </section>
+
+        
+<!--         <section> -->
+<!--           <h2>Our entry-point, index.html</h2> -->
+<!--           <pre><code class="html smallfont-80" data-trim> -->
+<!-- <!DOCTYPE html> -->
+<!-- <meta charset="utf-8"> -->
+<!-- <style> -->
+<!-- .bar { -->
+<!--   fill: steelblue; -->
+<!-- } -->
+
+<!-- .axis text { -->
+<!--   font: 10px sans-serif; -->
+<!-- } -->
+
+<!-- .axis path, -->
+<!-- .axis line { -->
+<!--   fill: none; -->
+<!--   stroke: #000; -->
+<!--   shape-rendering: crispEdges; -->
+<!-- } -->
+
+<!-- .x.axis path { -->
+<!--   display: none; -->
+<!-- } -->
+<!-- </style> -->
+
+<!-- <svg id="chart"></svg> -->
+<!-- <div id='buttons'></div> -->
+
+<!-- &lt;script src="http://d3js.org/d3.v3.min.js">&lt;/script> -->
+<!-- &lt;script src="static/simplechart.js">&lt;/script> -->
+<!-- &lt;script src="static/script.js">&lt;/script> -->
+<!--             </code></pre> -->
+          
+<!--         </section> -->
+
+<!--         <section> -->
+<!--           <h2>Building a chart with D3</h2> -->
+<!--           <pre><code class="smallfont-50 js" data-trim> -->
+<!-- var SimpleChart = function() { -->
+<!--     var margin = {top: 15, right: 30, bottom: 15, left: 40}, -->
+<!--     width = 600 - margin.left - margin.right, -->
+<!--     height = 400 - margin.top - margin.bottom; -->
+<!--     // SETUP SCALES AND AXES -->
+<!--     // initialize all chart elements not dependent on data or calling DOM-element -->
+<!--     var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.1); -->
+<!--     var y = d3.scale.linear().range([height, 0]); -->
+<!--     var xAxis = d3.svg.axis().scale(x).orient("bottom"); -->
+<!--     var yAxis = d3.svg.axis().scale(y).orient("left"); -->
+<!--     // this closed chart is returned on 'new SimpleChart()' call. It can then be -->
+<!--     // extended and adapted prior to being applied to a DOM object -->
+<!--     var chart = function(selection) { -->
+<!--         selection.each(function(data) { -->
+<!--             var g; -->
+<!--             // select head group and bind a single data object to it -->
+<!--             chart.svg = d3.select(this).selectAll('g').data([data]); -->
+<!--             // SETUP CHART IF NECESSARY -->
+<!--             var gEnter = chart.svg.enter().append('g'); -->
+<!--             gEnter.append("g").attr("class", "x axis"); -->
+<!--             gEnter.append("g").attr("class", "y axis"); -->
+<!--             gEnter.append("g").attr("class", "plot-area"); -->
+<!--             // UPDATE CHART DOMAINS WITH NEW DATA -->
+<!--             x.domain(data.map(function(d) { return d.name; })); -->
+<!--             y.domain([0, d3.max(data, function(d) { return d.value; })]); -->
+<!--             // UPDATE DIMENSIONS IF WIDTH OR MARGINS CHANGED -->
+<!--             chart.svg -->
+<!--                 .attr("width", width + margin.left + margin.right) -->
+<!--                 .attr("height", height + margin.top + margin.bottom); -->
+<!--             g = chart.svg -->
+<!--                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")"); -->
+<!--             // UPDATE THE AXES  -->
+<!--             g.select('.x.axis') -->
+<!--                 .attr("transform", "translate(0," + height + ")") -->
+<!--                 .transition().duration(1000).call(xAxis); -->
+<!--             g.select('.y.axis') -->
+<!--                 .transition().duration(1000).call(yAxis); -->
+<!--             // UPDATE THE BARS -->
+<!--             // select all bars and bind new data -->
+<!--             var cd = g.select('.plot-area').selectAll('.bar') -->
+<!--                 .data(data); -->
+<!--             // enter the data and append new rects if necessary -->
+<!--             cd.enter().append("svg:rect") -->
+<!--                 .attr("class", "bar"); -->
+<!--             // remove any existings rects without data -->
+<!--             cd.exit()remove(); -->
+<!--             // update attributes of all remaining rects with new data -->
+<!--             cd.transition().duration(1000) -->
+<!--                 .attr("x", function(d) { return x(d.name); }) -->
+<!--                 .attr("y", function(d) { return y(d.value); }) -->
+<!--                 .attr("height", function(d) { return height - y(d.value); }) -->
+<!--                 .attr("width", x.rangeBand()); -->
+<!--         }); -->
+<!--     }; -->
+
+<!--     return chart; -->
+<!-- }; -->
+<!--             </code></pre> -->
+<!--         </section> -->
+
+        <section>
+          <h2>Building a chart with D3 (condensed)</h2>
+          <pre><code class="smallfont-60 js" data-trim>
+var SimpleChart = function() {
+    var margin = {top: 15, right: 30, bottom: 15, left: 40},
+    width = 600 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+    var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.1);
+    var y = d3.scale.linear().range([height, 0]);
+    var xAxis = d3.svg.axis().scale(x).orient("bottom");
+    var yAxis = d3.svg.axis().scale(y).orient("left");
+    var chart = function(selection) {
+        selection.each(function(data) {
+            chart.svg = d3.select(this).selectAll('g').data([data]);
+            var gEnter = chart.svg.enter().append('g');
+            gEnter.append("g").attr("class", "x axis");
+            gEnter.append("g").attr("class", "y axis");
+            gEnter.append("g").attr("class", "plot-area");
+            x.domain(data.map(function(d) { return d.name; }));
+            y.domain([0, d3.max(data, function(d) { return d.value; })]);
+            chart.svg
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom);
+            var g = chart.svg
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            g.select('.x.axis')
+                .attr("transform", "translate(0," + height + ")")
+                .transition().duration(1000).call(xAxis);
+            g.select('.y.axis')
+                .transition().duration(1000).call(yAxis);
+            var cd = g.select('.plot-area').selectAll('.bar')
+                .data(data);
+            cd.enter().append("svg:rect")
+                .attr("class", "bar");
+            cd.exit()remove();
+            cd.transition().duration(1000)
+                .attr("x", function(d) { return x(d.name); })
+                .attr("y", function(d) { return y(d.value); })
+                .attr("height", function(d) { return height - y(d.value); })
+                .attr("width", x.rangeBand());
+        });
+    };
+    return chart;
+};
+            </code></pre>
+        </section>
+        
+
+
+        <section>
+          <h2>D3 101</h2>
+          <ul>
+            <li>SELECT a DOM element: svg = select('svg')</li>
+            <li>BIND some DATA to it: bars = svg.selectAll('.bar').data()</li>
+            <li>ENTER and APPEND: bars.enter().append('rect').attr('class', 'bar')</li>
+            <li>EXIT and REMOVE: bars.exit().remove()</li>
+            <li>Think of stamping a DOM-element with a data-dependent cutter</li>
+          </ul>
+        </section>
+
+
+        <section>
+          <h2>Reactive charts and data-filters</h2>
+          <h3>Using Angular Directives and Bootstrap to create control-panel with html</h3>
+
+          <pre style='white-space:pre-wrap'><code class='html smallfont-80' data-trim>
+<chart-group dataURL='/static/data/test_data.json'> 
+  <h2>Histograms and barcharts with menu-filter and chart-filter </h2>
+  <filter-menu ng-if='data' data='data'></filter-menu>
+  <div class='row'>
+    <klinechart-filter class='col-md-12' data='data' value='baacoefficient'
+         y-axis='order' x-axis='baacoefficient' height='160'></klinechart-filter>
+    <khist2d data='data' class='col-md-4' xKey='type' yKey='foofactor'
+         countKey='baacoefficient' activeAxes='true'></khist2d>
+    <khist2d  data='data' class='col-md-4' xKey='product_subgroup' yKey='foofactor'
+         countKey='baacoefficient' activeAxes='true'></khist2d>
+    <khist2d  data='data' class='col-md-4' xKey='product_family' yKey='foofactor'
+          countKey='baacoefficient' activeAxes='true'></khist2d>
+    <kpiechart class='col-md-3' data='data' col='type'></kpiechart>
+    <kbarchart class='col-md-3' data='data' col='product_family'></kbarchart> 
+    <kbarchart class='col-md-3' data='data' col='product_subgroup'></kbarchart> 
+    <kbarchart class='col-md-3' data='data' col='foofactor'></kbarchart> 
+  </div>
+</chart-group></code><pre></section>
+
+        <section>
+          <h2>Reactive charts and data-filters</h2>
+          <h3>Charts responding to data change</h3>
+          <video controls src="images/active_charts.webm" style='max-height:580px'></video>
+        </section>
+
+        <section>
+          <h2>Summing up</h2>
+          <ul>
+            <li>Now is a great time to be doing web visualizations</li>
+            <li>WebGL, SVG, CSS3D all pretty solid and getting more so</li>
+            <li>Some hugely powerful, mature libraries and a fast language</li>
+            <li>Python natural compliment to Javascript - no replacement for the ease it brings to data-analysis</li>
+            <li>Hope this talk has provided at least a small springboard</li>
+            <li>Get out there, play around and have some fun</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Resources</h2>
+          <ul>
+            <li>This talk and previous at <a href="http://kyrandale.com/talks">kyrandale.com/talks</a></li>
+            <li>The simple bar-chart demonstrated, with annotation <a href='http://kyrandale.com/viz/static/expts/d3_simplechart/index.html'>http://kyrandale.com/viz/static/expts/d3_simplechart/index.html</a></li>
+            <li>The reactive chart demo at <a href="http://kyrandale/apps/#/bar-hist-demo">http://kyrandale/apps/#/bar-hist-demo</a> 
+            <li>Theta-function <a href="http://dlmf.nist.gov/21.4.F1i.webgl">http://dlmf.nist.gov/21.4.F1i.webgl</a></li>
+            <li>The library that built it, with lots of cool demos <a href="www.x3dom.org">www.x3dom.org</a></li>
+            <li>The D3 motherloads: Gallery <a href="https://github.com/mbostock/d3/wiki/Gallery">https://github.com/mbostock/d3/wiki/Gallery</a>, github gists brought to life <a href="http://bl.ocks.org/mbostock">http://bl.ocks.org/mbostock</a></li>  
+            <li><a href="http://visualizing.org/">visualizing.org</a>, <a href="http://threejs.org/examples/">http://threejs.org/examples/</a></li>
+          </ul>
+        </section>
+
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+      // kgd
+      width:1024,
+      height:768,
+      margin:0.025,
+      
+
+      theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+      transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+      // Parallax scrolling
+      // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+      // parallaxBackgroundSize: '2100px 900px',
+
+      // Optional libraries used to extend on reveal.js
+      dependencies: [
+      { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+      { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+      ]
+      });
+
+    </script>
+
+  </body>
+</html>

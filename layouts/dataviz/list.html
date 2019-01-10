@@ -1,0 +1,22 @@
+{{ define "main" }}
+{{ "<!-- Main -->" | safeHTML }}
+
+<div id="main-post" class="alt">
+
+  <article id="one" class="post-container">
+    <div class="inner">
+      <div class="info-boxes">
+
+      {{ range $i, $e := $.Site.Data.viz_articles.order }}
+      {{ $article := index $.Site.Data.viz_articles.articles $e }}
+        <div class="info-box">
+          <a class="title" href="{{ $article.href }}">
+            <h2>{{ $article.title }} </h2>
+          </a>
+        </div>
+      {{ end }}
+      </div>
+    </div>
+  </article>
+</div>
+{{ end }}

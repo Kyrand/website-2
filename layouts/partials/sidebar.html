@@ -1,0 +1,26 @@
+<div class="sidebar d-print-none d-none d-xl-block">
+    {{ partial "sidebar-about-me" . }}
+    <h2>Top Posts</h2>
+    <ul>
+    {{ range .Site.Taxonomies.categories.featured }}
+      <li><a href="{{ .Permalink }}" class="nav-link">{{ .Title }}</a></li>
+    {{ end }}
+    </ul>
+    <h2>Recent Posts</h2>
+    <ul>
+    {{ range first 8 .Site.Pages }}{{ if (eq .Section "post") }}
+      <li><a href="{{ .Permalink }}" class="nav-link">{{ .Title }}</a></li>
+    {{ end }}{{ end }}
+    </ul>
+    {{ range $key, $value := .Site.Taxonomies }}
+    <h2>{{ $key }}</h2>
+    <ul>
+        {{ range first 10 $value.ByCount }}
+        <li><a href='{{ $.Site.BaseURL}}{{ $key }}/{{ (replace .Name "#" "%23") | urlize }}/' class="nav-link category">
+        {{ .Name }}
+        <span class="badge badge-pill badge-secondary">{{ .Count }}</span>
+        </a></li>
+        {{ end }}
+    </ul>
+    {{ end }}
+</div>

@@ -1,0 +1,300 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: initial;
+  letter-spacing: initial;
+}
+
+@media screen and (max-width: 1280px) {
+  body, input, select, textarea {
+    font-size: 14pt;
+  }
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Index.html */
+.front-page #worked-with {
+  background: #4c6f8b;
+  padding-top: 1.5rem;
+}
+
+.front-page footer {
+  background: #4c6f8b;
+  opacity: 0.85;
+}
+
+
+#main-post.alt {
+  background-color: #fafafa;
+  color: #333;
+}
+
+#main-post h1,
+#main-post h2,
+#main-post h3,
+#main-post h4,
+#main-post h5,
+#main-post h6 {
+  color: #333;
+}
+
+
+/* Overwritten Forty styles */
+article#pyjsbook {
+  background-size: contain;
+}
+
+#banner > .inner .content p {
+  text-transform: none;
+  font-size: 100%;
+  letter-spacing: inherit;
+  font-weight: 700;
+}
+
+#banner {
+  /* color: #333; */
+}
+
+#contact {
+  background-color: #4c6f8b;
+  //opacity: 0.85;
+}
+
+/* MARKDOWN HACKS */
+img[src$='#center']
+{
+  display: block;
+  margin: 0.7rem auto; /* you can replace the vertical '0.7rem' by
+                            whatever floats your boat, but keep the
+                            horizontal 'auto' for this to work */
+  /* whatever else styles you fancy here */
+}
+
+img[src$='#floatleft']
+{
+  float:left;
+  margin: 0.7rem;      /* this margin is totally up to you */
+  /* whatever else styles you fancy here */
+}
+
+img[src$='#floatright']
+{
+  float:right;
+  margin: 0.7rem;      /* this margin is totally up to you */
+  /* whatever else styles you fancy here */
+}
+
+.center {
+  display: block;
+  margin: 0.7rem auto;
+}
+
+.share-icons {
+font-size: 1.2em;
+display: flex;
+justify-content: center;
+}
+
+.share-icons a {
+  padding: .5rem;
+  border-bottom: none;
+}
+
+#main-post .post-container .inner {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+  padding: 4em 1em 2em 1em;
+  max-width: initial;
+}
+
+.post {
+  padding-right: 2em;
+  flex: 3;
+}
+
+.sidebar {
+  flex: 1;
+  font-size: 90%;
+}
+
+.sidebar h2 {
+  text-transform: uppercase;
+  font-size: 1.5em;
+  font-weight: 600;
+  margin: 0;
+}
+
+.sidebar .nav-link{
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0.5em 0 0.2em 0;
+}
+
+.badge-secondary {
+  background: #ccc;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+
+.badge-pill {
+  padding-right: .6em;
+  padding-left: .6em;
+  border-radius: 10rem;
+}
+
+.sidebar ul li {
+  padding-left: 0;
+}
+
+.fa-circle {
+  color: rgba(200, 200, 200, 1);
+}
+
+header.post-major {
+  margin-bottom: 2em;
+}
+
+header.post-major > :first-child {
+  margin-bottom: 0;
+  width: initial;
+}
+
+header.post-major > :first-child:after {
+  content: "";
+  background-color: #333;
+  display: block;
+  height: 2px;
+  margin: 0.325em 0 0.5em 0;
+  width: 100%;
+}
+
+#main-post strong,
+#main-post b {
+  color: #333;
+}
+
+#main-post a:hover {
+  color: #333;
+  background: #718ea5;
+}
+
+i.fa-twitter {
+  color: #fff;
+}
+
+.post-meta-header {
+  display: flex;
+}
+
+.post-meta-header div {
+  padding: 0 2em 2em 0;
+}
+
+.post-meta-header h6 {
+  font-size: 1em;
+  margin-bottom: 0.2em;
+}
+
+.post-meta-header a {
+  font-style: italic;
+  font-size: 0.8em;
+}
+
+.image.main img {
+  width: initial;
+  height: 300px;
+  margin: auto;
+}
+
+
+/* LISTS */
+
+.recent-posts .post {
+  margin-bottom: 2em;
+}
+
+.recent-posts h2 {
+  margin-bottom: 0em;
+}
+
+.post-image-small {
+  height: 200px;
+  padding: 0 1em 1em 0;
+  float: left;
+}
+
+.post-meta-small {
+  padding-bottom: 1.5em;
+}
+
+/* #wrapper.front-page { */
+/*   color: #fff; */
+/* } */
+
+/* Markdown classes */
+
+.center-figure {
+  text-align: center;
+}
+
+.toolchain-list {
+  list-style-position: inside;
+  float: left;
+}
+
+
+#boids-tank {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -9999;
+}
+
+/* Hire-me page */
+h2#worked-with {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.logos {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 0 2.5rem;
+}
+
+.logo {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.logo a {
+  border-bottom: none;
+}
+
+.logo img {
+  height: 150px;
+}

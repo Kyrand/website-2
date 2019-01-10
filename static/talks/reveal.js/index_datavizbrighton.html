@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Dataviz Brighton: Crafting a dataviz toolchain</title>
+
+		<meta name="description" content="To the Web and Beyond">
+		<meta name="author" content="Kyran Dale">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="lib/css/kgd.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+
+		</script>
+
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Crafting a Dataviz Toolchain with Python and JavaScript</h1>
+				        <h3>Dataviz Brighton</h3>
+					<p>
+						<small>Created by <a href="http://kyrandale.com">Kyran Dale</a> / <a href="http://twitter.com/kyran_dale">@kyran_dale</a></small>
+					</p>
+				</section>
+
+        <section>
+            <img src="media/images/pyjsbook_cover.png" class="" alt="" style="" height='550px' />
+        </section>
+
+        <section>
+            <blockquote>
+                This book aims to get you up to speed with what is, in my opinion, the most powerful data-visualisation stack going: Python and JavaScript. You'll learn enough of big libraries like Pandas and D3 to start crafting your own web data-visualisations and refining your own toolchain. Expertise will come with practice but this book presents a shallow learning curve to basic competence.
+            </blockquote>
+        </section>
+
+        <section>
+            <h2>The Dataviz Toolchain</h2>
+            <img src="media/images/toolchain.png" class="" alt="" style="" />
+        </section>
+
+        <section data-background-iframe='demos/wikipedia-nobel/index.html'></section>
+
+        <!-- <section data-background-iframe='demos/nobel_viz/index.html'></section> -->
+        <section data-background-iframe='http://kyrandale.com/static/pyjsdataviz/index.html'></section>
+
+        <section>
+            <h2>Low Entry Threshold for Beginner Dataviz Programmers</h2>
+            <p>
+                Python and JavaScript are arguably vying for  #1 and #2 best choice first programming language. They are relatively simple, scripting languages with little of the overhead found in more `Enterprisey' languages like Java and C++.
+            </p>
+            <p>
+                But unlike most introductory languages they're both a good start and end point for ambitious data-visualizers.
+            </p>
+        </section>
+
+        <section>
+            <h2>Why Dataviz Must Go To the Web</h2>
+            <ul class='big-message'>
+                <li class='fragment'>Communication</li>
+                <li class='fragment'>Distribution</li>
+                <li class='fragment'>Convenience</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Why Dataviz Must Go To the Web</h2>
+            <p>The humble URL as a token of exchange.</p>
+            <ul>
+                <li>Cloud servers in a few clicks (AWS, Heroku, DigitalOcean etc.)</li>
+                <li>JFiddle, JSBin et. al. - demo live JavaScript visualisations.</li>
+                <li>http://blockbuilder.org/ - Github gists to D3 visualisations (11,000 examples!).</li>
+                <li>Rich ecosystem, skills freely traded, standards rising inexorably.</li>
+                <li>Barriers to entry dropping all the time...</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Nobody Likes Me, Everybody Hates Me...</h2>
+            <h3>Coming to terms with JavaScript</h3>
+            <img src="media/images/elephant.png" class="" alt="" style="" />
+        </section>
+
+
+        <section>
+            <h2>JavaScript's Development</h2>
+            <ul>
+                <li>JS a 'toy' language.</li>
+                <li>Ugly, kludgy syntax</li>
+                <li>Slow interpreter</li>
+                <li>Generally small code-bases</li>
+                <li>Difficult to scale</li>
+            </ul>
+        </section>
+
+
+        <section>
+            <h2>ECMAScript 2016</h2>
+            <h3>Better all the time</h3>
+            <ul>
+                <li>Modules!!, e.g. `import defaultMember from "module-name";'</li>
+                <li>Default parameters!, e.g. `def foo(bar, baz=10){...'</li>
+                <li>No more for loops, e.g. `[1, 2, 3].forEach(d => console.log(d));'</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Shifting Bits</h2>
+            <h3>JS smokes Python for speed</h3>
+            <img src="media/images/JSsmokesPython.png" class="" alt="" style="" />
+        </section>
+
+        <section>
+            <h2>JavaScript's Development</h2>
+            <p>If JavaScript is good and getting better why bother with Python?</p>
+        </section>
+
+        <section>
+            <h2>JavaScript's Development</h2>
+            <p>Nothing to remotely compare in JS ecosystem with Python's data-processing stack. NumPy, SciPy, Pandas, scikit-learn etc. are all in different league to anything JS has to offer. Data-processing with JS is currently a pain.</p>
+        </section>
+
+        <section>
+            <h2>Dataviz Toolchain</h2>
+            <img src="media/images/toolchain.png" class="" alt="" style="" />
+        </section>
+
+        <section>
+            <h2>Getting in the Game</h2>
+            <h3>Simplify your life</h3>
+            <ul>
+                <li>Avoid frameworks like Angular, React (Flux), Meteor etc..  </li>
+                <li>Innoculate against JS Toolitus - Grunt, Gulp, Yeoman, Bower etc..  </li>
+                <li>Learn the basic HTML elements, &lt;div> content blocks, &lt;select> selectors etc..</li>
+                <li>Invest some time learning Scalable Vector Graphics (SVG) elements.</li>
+                <li>Don't worry about LESS or SASS for now - vanilla CSS is fine.</li>
+                <li>In fact, vanilla everything is a pretty good place to start.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Your Webdev Tools</h2>
+            <h3>Decent editor, browser developer tools (Chrome by a mile), console</h3>
+            <img src="media/images/webdevtools.png" class="" alt="" style="" height='450px'/>
+        </section>
+
+
+        <section>
+            <h2>Conclusion</h2>
+            <ul>
+                <li>This is a very exciting time for Dataviz as powerful and relatively approachable tools become available and the web allows free (as in beer) sharing.</li>
+                <li>Python and JavaScript are the perfect complement for a powerful dataviz stack.</li>
+                <li>JavaScript is non-negotiable, being the only first class browser language but fortunately has some extremely mature, powerful dataviz libraries, D3 being pre-eminent.</li>
+                <li>The Python Data-processing ecosystem is growing at an incredible pace, offering the power of parallelised, optimised, low-level libraries for data mining, machine learning, cluster analysis etc. with the ease of a succinct, readable and highly efficient high level scripting language. </li>
+            </ul>
+        </section>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+                <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+                        Reveal.addEventListener('slidechanged', function(event) {
+                        if($(event.currentSlide).attr('data-background-iframe')) {
+                        $('.reveal > .backgrounds').css('z-index', 1);
+                } else {
+                $('.reveal > .backgrounds').css('z-index', 0);
+                }
+                });
+		</script>
+
+	</body>
+</html>

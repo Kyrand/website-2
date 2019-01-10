@@ -1,0 +1,263 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="lib/css/kgd.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+      <div class="slides">
+
+        <section>
+          <h2>Brief Introduction</h2>
+          <p>
+            I'm an ex research scientist, bumble-bee trainer, evolutionary roboticist. Now primarily interested in what JavaScript can achieve on your local browser, particularly in the field of data visualization (not optional!). Currently playing with D3 and WebVR.
+          </p>
+        </section>
+
+        <section>
+          <h2>Data Visualization with Python and JavaScript</h2>
+          <img src="media/images/pyjsbook_cover.png" class="" alt="" style="" />
+        </section>
+
+        <section>
+          <h2>The Dataviz Toolchain</h2>
+          <h3>Transforming the data</h3>
+          <img src="media/images/toolchain_transform.png" class="" alt="" style="" />
+        </section>
+
+        <section>
+            <h2>Why Dataviz Must Go To the Web</h2>
+            <ul class='big-message'>
+                <li class='fragment'>Communication</li>
+                <li class='fragment'>Distribution</li>
+                <li class='fragment'>Convenience</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Why Dataviz Must Go To the Web</h2>
+            <p>The humble URL as a token of exchange.</p>
+            <ul>
+                <li>Cloud servers in a few clicks (AWS, Heroku, DigitalOcean etc.)</li>
+                <li>JFiddle, JSBin et. al. - demo live JavaScript visualisations.</li>
+                <li>http://blockbuilder.org/ - Github gists to D3 visualisations (11,000 examples!).</li>
+                <li>Rich ecosystem, skills freely traded, standards rising inexorably.</li>
+                <li>Barriers to entry dropping all the time...</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Nobody Likes Me, Everybody Hates Me...</h2>
+            <h3>Coming to terms with JavaScript</h3>
+            <img src="media/images/elephant.png" class="" alt="" style="" />
+        </section>
+
+        <section>
+            <h2>JavaScript's Development</h2>
+            <ul>
+                <li>JS a 'toy' language.</li>
+                <li>Ugly, kludgy syntax</li>
+                <li>Slow interpreter</li>
+                <li>Generally small code-bases</li>
+                <li>Difficult to scale</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>ECMAScript 2016</h2>
+            <h3>Better all the time</h3>
+            <ul>
+                <li>Modules!!, e.g. `import defaultMember from "module-name";'</li>
+                <li>First class functional methods like <code>map</code>, <code>reduce</code> and <code>filter</code>.</li>
+                <li>Default parameters!, e.g. `foo = function(bar, baz=10){...'</li>
+                <li>No more for loops, e.g. `[1, 2, 3].forEach(d => console.log(d));'</li>
+                <li>The very handy spread operator <code>{...object, key1=value1}</code></li>
+                <li>And many more syntactic conveniences...</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Shifting Bits</h2>
+            <h3>JS smokes Python for speed</h3>
+            <img src="media/images/JSsmokesPython.png" class="" alt="" style="" />
+        </section>
+
+        <section>
+          <h2>The Joys of D3</h2>
+          <h3>Beyond the barchart</h3>
+          <ul class="code7">
+            <li>Implementation of Wilkinson's 'Grammar of Graphics' (cf. ggplot2)</li>
+            <li>Solid theoretical core makes it incredibly powerful and expressive</li>
+            <li>It flows where other libraries tend to lock-up</li>
+            <li>Perhaps the greatest genius of Mike Bostock was implementing it in Javascript (then considered a 'toy' language)</li>
+            <li>Not a charting library but the library you make charting libraries with </li>
+            <li>New forms of data-visualisation waiting to be discovered</li>
+          </ul>
+        </section>
+
+        <section data-background-iframe='demos/data-transformation/index.html'>
+        </section>
+
+        <section>
+          <h2>Hacks We Have Known</h2>
+          <h3>Empowerment close to the metal</h3>
+          <video controls src="media/movies/govapp_labelclash.mp4" style='max-height:480px'></video>
+        </section>
+
+        <section>
+          <h2>Hacks We Have Known</h2>
+          <h3>Empowerment close to the metal</h3>
+          <video controls src="media/movies/govapp_nolabelclash.mp4" style='max-height:480px'></video>
+        </section>
+
+        <section>
+          <h2>Hacks We Have Known</h2>
+          <h3>Empowerment close to the metal</h3>
+          <pre><code data-trim class="js code5">
+var fixLabels = function() {
+    labelPos.sort(function(a, b) {
+        return a.pos > b.pos;
+    });
+
+    var labelToPos = {};
+    labelToPos[labelPos[0].name] = labelPos[0].pos;
+
+    labelPos.forEach(function(d,i){
+        if(i === labelPos.length-1){return;}
+        var dist = labelPos[i+1].pos - d.pos;
+        if(dist < MIN_LABEL_GAP){
+            labelPos[i+1].pos = d.pos + MIN_LABEL_GAP;
+        }
+    });
+
+    labelPos.forEach(function(d) {
+        labelToPos[d.name] = d.pos;
+    });
+
+    d3.selectAll(".line-label")
+        .transition()
+        .duration(1000)
+        .attr("transform", function(d) {
+            var yPos = labelToPos[sanitizeName(d.name)];
+            return "translate(" + x.range()[1] + ',' + yPos + ")"; });
+
+};
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Web-ward Options for Pythonistas and others</h2>
+          <ul class="code7">
+            <li>Tableau, Power-Bi et. al.</li>
+            <li>Jupyter (IPython) notebook with embedded charts.</li>
+            <li>Plotly, Bokeh et. al.</li>
+            <li>Vega (with Vincent) visualisation grammar.</li>
+            <li>Bite the JavaScript bullet (D3 et. al.)...</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Biting the JS (and D3) Bullet</h2>
+          <p>
+            Eventually, if your ambitions expand the programmers among you will probably become frustrated with the limitations of GUI-based dataviz. Being able to leverage the huge power of D3 opens up possibilites unachievable by other routes.
+          </p>
+        </section>
+
+        <section>
+          <h2>Recap Day 1</h2>
+          <ul>
+            <li>Basic Webdev requirements</li>
+            <li>Intro do D3</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Webdev 101</h2>
+          <ul class="code7">
+            <li>Four key compoments being HTML, CSS, JavaScript and, of course, the data.</li>
+            <li>We build a dataviz framework in HTML and CSS and then...</li>
+            <li>... use JavaScript (and D3) to flesh it out by...</li>
+            <li>... reflecting our dataset in graphical form.</li>
+            <li>This commonly involves manipulating SVG primatives</li>
+            <li>We saw how circles, lines, rects, paths etc. can be hardcoded using HTML</li>
+            <li>But usually we are using D3 to programmatically generate our graphical elements.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>D3 Intro, the Story of a Barchart</h2>
+          <ul class="code7">
+            <li>We saw the all important selectors ( <code>select</code> and <code>selectAll</code> at work), using CSS style selection to grab and adapt elements.</li>
+            <li>We saw how attributes, styles, properties, text etc. could be adapted, using a setter form or retrieved using the methods without a second paramter</li>
+            <li>With these tools to hand we looked at the fundamental update pattern, which uses the <code>data</code>, <code>enter</code>, <code>exit</code>, <code>merge</code> and <code>remove</code> methods to keep a changing dataset in sync with a data visualization</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Recap Day 2</h2>
+          <ul>
+            <li>How to structure a complex data visualization</li>
+            <li>How to do modern JS dataviz, using node, ES6 and a starter kit</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Complex visualizations</h2>
+          <p>
+            Think in terms of a central datastore that is refelcted visually, through various charts or conventional HTML. When the datastore is changed, e.g. an array is filtered by field (all people over 35 say), that change is mirrored in the visual elements, propagating forward. This pattern is found in modern JS framworks such as React.
+          </p>
+        </section>
+
+        <section>
+          <h2>Doing Modern JS Dataviz</h2>
+          <p>
+            It's now easy to create all the boilerplate required to do modern JS development using a single command line starter-kit. We use <code>create-react-app</code> to demonstrate how to build a reusable D3 plugin. We saw how clean modern JS is when compared with having to curate style files, JS files et. al. and deal with <code>link</code> tags, <code>script</code> tags and the awkward use of HTML to manage JS libraries.
+          </p>
+        </section>
+
+        <!-- <section>
+             <h2>An Elephant in the Living-room</h2>
+             <img src="media/images/elephant.png" class="" alt="" style="" />
+             </section> -->
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+        history: true,
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,22 @@
+<!-- <div class="mb-3">
+     <small>
+     <i class="far fa-calendar-alt"></i>&nbsp;{{- .Date.Format "Jan 2, 2006" -}}&nbsp;
+     | <i class="fa fa-tags" title="Tags" aria-hidden="true"></i> {{ range $i, $e := .Params.tags }}{{ if $i }}, {{ end }}<a href='/tags/{{ (replace $e "#" "%23") | urlize }}/'>{{ $e }}</a>{{ end }}
+     </small>
+     <small>test</small>
+     </div> -->
+<div class="post-meta-header">
+  <div class="cats">
+    <h6>Categories</h6>
+    {{ range $i, $e := .Params.categories }}
+    {{if $i }}, {{ end }}<a href='/categories/{{ (replace $e "#" "%23") | urlize }}/'>{{ $e }}</a>
+    {{ end }}
+  </div>
+  {{ if isset .Params "link" }}
+  <div class="url">
+    <h6>Link</h6>
+    <!-- <a href='{{(replace .Params.link "#" "%23") | urlize }}/'>{{ .Params.link }}</a> -->
+    <a href='{{ .Params.Link | urlize }}/'>{{ .Params.link }}</a>
+  </div>
+  {{ end }}
+</div>

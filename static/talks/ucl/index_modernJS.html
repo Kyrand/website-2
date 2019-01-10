@@ -1,0 +1,747 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>reveal.js</title>
+
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/black.css">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+  <link rel="stylesheet" href="lib/css/kgd.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <h2>JS the Modern Way</h2>
+        <h3>Why Bother?</h3>
+        <p>
+          Working with <code>script</code> tags can be awkward. The order loading is important and delegating it to the HTML page just feels wrong for a programmer...
+        </p>
+      </section>
+
+      <section>
+        <h2>JS the Modern Way</h2>
+        <h3>Why Bother?</h3>
+        <p>
+          As a programmer you want to maintain your own modular libraries, easy to reuse and repurpose. For that a decent <code>import</code> system is essential.
+        </p>
+      </section>
+
+      <section>
+        <h2>JS the Modern Way</h2>
+        <h3>Why Bother?</h3>
+        <p>
+          Modern JS (ES6+) has a rather good import system (arguably better than Python's) and the proof is in the pudding. Once you've used it it's hard to imagine going back to clunky <code>script</code> tags. Genuine productivity benfits lie to hand...
+        </p>
+      </section>
+
+      <section>
+        <h2>JS the Modern Way</h2>
+        <p>
+          But there's more than just imports and modular decomposition. There's a lot of great syntactic "sugar" available in modern JS. And being able to access this without worrying about particular browser dependencies is the real issue at hand...
+        </p>
+      </section>
+
+      <section>
+        <h2>JS the Modern Way</h2>
+        <h3>JS toolitus</h3>
+        <ul>
+          <li>Webpack</li>
+          <li>Gulp, Grunt</li>
+          <li>Bower</li>
+          <li>Yeoman</li>
+          <li>Browserify</li>
+          <li>NPM</li>
+          <li>ad. inf.</li>
+        </ul>
+      </section>
+
+
+
+<section data-markdown>
+<textarea data-template>
+## Starting a Modern JS Dataviz project
+Use a bootstrapper (e.g. create-react-app) to avoid the tooling madness:
+
+`$ yarn add --global create-react-app`
+
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+## Starting a Modern JS Dataviz project
+Use `create-react-app` to create the boilerplate:
+```text
+$ create-react-app ucl-modern-js
+
+Creating a new React app in /home/kyran/.../ucl-modern-js.
+
+Installing packages. This might take a couple of minutes.
+Installing react, react-dom, and react-scripts...
+
+yarn add v1.3.2
+warning ../../../../../package.json: No license field
+info No lockfile found.
+...
+Done in 11.33s.
+...
+```
+
+</textarea>
+</section>
+
+<section>
+<h2>Starting a Modern JS Dataviz Project</h2>
+Provides some useful scripts:
+<pre><code data-trim class="text smaller-code">
+...
+Success! Created ucl-modern-js at /home/kyran/.../ucl-modern-js
+Inside that directory, you can run several commands:
+  yarn start
+  Starts the development server.
+
+  yarn build
+  Bundles the app into static files for production.
+  yarn test
+  Starts the test runner.
+  yarn eject
+  Removes this tool and copies build dependencies, configuration files
+  and scripts into the app directory. If you do this, you can’t go back!
+  We suggest that you begin by typing:
+  cd ucl-modern-js
+  yarn start
+</code></pre>
+</section>
+
+<section>
+<h2>Starting a Modern JS Dataviz Project</h2>
+Enter the directory and follow suggestion:
+<pre><code data-trim class="text smaller-code">
+> yarn start
+[...]
+
+Compiled successfully!
+
+You can now view ucl-modern-js in the browser.
+
+Local:            http://localhost:3000/
+On Your Network:  http://192.168.1.188:3000/
+
+Note that the development build is not optimized.
+To create a production build, use yarn build.
+</code></pre>
+</section>
+
+<section>
+<h2>Starting a Modern JS Dataviz Project</h2>
+
+<p>Head to your browser with address http://localhost:3000 and you can see the React intro screen.</p>
+<img src="media/images/welcomeToReact.png" class="" alt="" style="" />
+</section>
+
+<section>
+<h2>Starting a Modern JS Dataviz Project</h2>
+<h3>Hot Editing</h3>
+
+<p>As per the message on the root page:</p>
+<pre>To get started, edit src/App.js and save to reload.</pre>
+<p>Changes made to the code will be hot-loaded to the browser, making for a pretty efficient, responsive work flow.</p>
+</section>
+
+<section>
+<h2>Starting a Modern JS Dataviz Project</h2>
+<h3>The Apps directory structure</h3>
+<pre class="code5">
+ucl-modern-js
+├── package.json
+├── node_modules
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   └── manifest.json
+├── README.md
+├── src
+│   ├── App.css
+│   ├── App.js
+│   ├── App.test.js
+│   ├── index.css
+│   ├── index.js
+│   ├── logo.svg
+│   └── registerServiceWorker.js
+└── yarn.lock
+</pre>
+</section>
+
+<section>
+<h2>Starting a Modern JS Dataviz Project</h2>
+<h3>Key elements:</h3>
+<ul class="code6">
+  <li><code>package.json</code> - keeps track of node modules being used and other housekeeping.
+    </li>
+    <li>
+      <code>node_modules</code> - directory where libraries installed using `npm` or `yarn` are installed.
+    </li>
+    <li>
+      <code>public directory</code> - where compiled files are built and served (e.g. `yarn build`)
+    </li>
+    <li>
+      <code>public/index.html</code> - root page for the app (with compiled JavaScript appended as, usually, `bundle.js`)
+    </li>
+    <li>
+      <code>README.md</code> - replace this with some useful info on, for example, running app, selected dependencies, any data requirements or assumptions (e.g. data schema for visualization)
+    </li>
+    <li>
+      <code>src</code> directory contains JavaScript and CSS. Files here are compiled by `yarn build` into a single, servable JS bundle. (demo)
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2>A Modern JS Dataviz Project</h2>
+  <h3>Adapting the source</h3>
+  <p>Change the title in the <code>index.html</code> file:</p>
+  <pre><code data-trim>
+<!-- ... -->
+    <title>UCL Modern JS Demo App</title>
+  </head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root"></div>
+<!-- ... -->
+  </code></pre>
+</section>
+
+<section>
+  <h2>A Modern JS Dataviz Project</h2>
+  <h3>Adapting the source code</h3>
+  <p>The boilerplate <code>index.js</code> file. Note that we can import <code>css</code> files directly, instead of using a <code>link</code> tag in our <code>index.html</code> file:</p>
+  <pre><code data-trim class="javascript">
+// index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import registerServiceWorker from './registerServiceWorker';
+
+ReactDOM.render(&lt;App /&gt;, document.getElementById('root'));
+registerServiceWorker();
+  </code></pre>
+</section>
+
+<section>
+  <h2>A Modern JS Dataviz Project</h2>
+  <p>
+remove React elements (and semi-colons, for personal preference)
+  </p>
+  <pre><code data-trim>
+import './index.css'
+  </code></pre>
+</section>
+
+<section>
+  <h2>A Modern JS Dataviz Project</h2>
+  <h3>Installing node libraries</h3>
+  <p>
+    Let's install D3 (who needs <code>&lt;script&gt;</code> tags?), using node's <code>npm</code> installer:
+  </p>
+  <pre><code data-trim class="text smaller-still-code">
+ ➜  ucl-modern-js git:(master) ✗ yarn add d3
+yarn add v1.3.2
+warning ../../../../../package.json: No license field
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+info fsevents@1.2.4: The platform "linux" is incompatible with this module.
+info "fsevents@1.2.4" is an optional dependency and failed compatibility check. Excluding it
+allation.
+[3/4] Linking dependencies...
+[4/4] Building fresh packages...
+success Saved lockfile.
+success Saved 35 new dependencies.
+├─ d3-array@1.2.1
+├─ d3-axis@1.0.8
+├─ d3-brush@1.0.4
+├─ d3-chord@1.0.4
+├─ d3-collection@1.0.4
+├─ d3-color@1.2.0
+...
+  </code></pre>
+</section>
+
+<section>
+  <h2>A Modern JS Dataviz Project</h2>
+  <h3>Installing node libraries</h3>
+  <p>
+    Let's install D3 (who needs <code>&lt;script&gt;</code> tags?), using node's <code>npm</code> installer:
+  </p>
+  <pre><code data-trim class="text smaller-still-code">
+{
+  "name": "ucl-test",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "d3": "^5.4.0", <<-----
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-scripts": "1.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
+  </code></pre>
+</section>
+
+
+<section>
+  <h2>A Modern JS Dataviz Project</h2>
+  <h3>Using node libraries, the ES6 way</h3>
+  <p>
+    We can now import D3 into our project:
+  </p>
+
+  <pre><code data-trim class="javascript">
+import * as d3 from 'd3'
+  </code></pre>
+  <p>
+    This gives the familiar <code>d3</code> object, just like the loaded script.
+  <br/>
+But we can load individual modules, which saves a bit of bandwidth:
+  </p>
+  <pre><code data-trim class="javascript">
+import {select, selectAll} from 'd3'
+  </code></pre>
+</section>
+
+<section>
+  <h2>A Modern JS Dataviz Project</h2>
+  <h3>Using node libraries, the ES6 way</h3>
+  <p>
+    Let's use D3 to add a title to our app:
+  </p>
+
+  <pre><code data-trim class="javascript">
+// index.js
+import './index.css'
+import {select, selectAll} from 'd3'
+
+select("#root")
+  .append("h2")
+  .text("UCL Demo of Modern JS Dataviz App")
+  </code></pre>
+</section>
+
+<section>
+  <h2>A Modern JS Dataviz Project</h2>
+  <h3>Using node libraries, the ES6 way</h3>
+  <p>
+    Let's use D3 to add a title to our app:
+  </p>
+
+  <pre><code data-trim class="javascript">
+// index.js
+import './index.css'
+import {select, selectAll} from 'd3'
+
+select("#root")
+  .append("h2")
+  .text("UCL Demo of Modern JS Dataviz App")
+  </code></pre>
+</section>
+
+<section>
+  <h2>A Modern JS Dataviz Project</h2>
+  <h3>Using node libraries, the ES6 way</h3>
+  <p>The title rendered in the browser</p>
+  <img src="media/images/modernJSTitle.png" class="" alt="" style="" />
+</section>
+
+<section>
+  <h2>A Modern JS Dataviz Project</h2>
+  <h3>Making some data available</h3>
+  <p>
+    To make data available to the app we'll add a <code>data</code> directory to the <code>public</code> directory. We'll use a classic dataset, giving the frequency of letters in the English language.
+  </p>
+  <pre><code data-trim class="tsv">
+// public/data/letters.tsv
+letter	frequency
+A	.08167
+B	.01492
+C	.02782
+D	.04253
+E	.12702
+F	.02288
+G	.02015
+H	.06094
+...
+  </code></pre>
+</section>
+
+<section>
+  <h2>A Modern JS Dataviz Project</h2>
+  <h3>Making some data available</h3>
+  <p>
+    A quick test to make sure we can load the dataset (note that D3 converts the tsv to a JS object). D3's new (v4) <code>tsv</code> convenience method uses JavaScript promises to provide the data from an AJAX request.
+  </p>
+
+  <pre><code data-trim class="javascript">
+// index.js
+import * as d3 from "d3"
+// ...
+d3.tsv("data/letters.tsv")
+  .then((data) => {
+    console.log(data)
+  })
+  </code></pre>
+</section>
+
+<section>
+  <h2>A Modern JS Dataviz Project</h2>
+  <h3>Making some data available</h3>
+  <p>Use the browser tools (Chrome in this case) to inspect the logged data:</p>
+  <img src="media/images/consoleLetters.png" class="" alt="" style="" />
+</section>
+
+<section>
+  <h2>Reusable D3</h2>
+  <h3>Making a Barchart plugin</h3>
+  <p>We're aiming to create a barchart plugin we can use in the following way:</p>
+  <pre><code data-trim class="javascript smaller-still-code">
+import Barchart from './Barchart'
+
+//...
+d3.tsv("data/letters.tsv")
+  .then((data) => {
+
+    let bc = Barchart()
+          .xField("letter")
+          .yField("frequency")
+
+    d3.select("#root")
+      .append("div")
+      .datum(data) // datum binds data to single element
+      .style("width", "400px")
+      .style("height", "400px")
+      .attr("class", "barchart")
+      .call(bc)
+  })
+  </code></pre>
+</section>
+
+<section>
+  <h2>Reusable D3</h2>
+  <h3>Making a Barchart plugin</h3>
+  <p>
+   The barchart call will produce the following browser output:
+  </p>
+  <img src="media/images/uclBarchartSingle.png" class="" alt="" style="" />
+</section>
+
+<section>
+  <h2>Reusable D3</h2>
+  <h3>Making a Barchart plugin</h3>
+  <p>
+    A basic plugin skeleton:
+  </p>
+  <pre><code data-trim class="javascript code6">
+export default function() {
+// API VARIABLES
+  let xField, yField
+  let xAxisTitle = null, yAxisTitle = null
+  let margin = {top:20, right:20, bottom:35, left:40}
+  // api function to return on call
+  function api(selection) {
+    selection.each(function(data){
+      let chartHolder = d3.select(this)
+      // DIMENSIONS
+      // SCALES
+      // SET SCALE DOMAINS BASED ON DATA
+      // AXES
+      // SVG CHART HOLDER
+      // ADD AXES SVG GROUPS
+      // BUILD X AND Y AXES
+      // MAKE BARS FROM DATA
+    })
+  }
+  // API METHODS
+  api.xField = function(_xField){
+    xField = _xField
+    return api
+  }
+  return api
+}
+  </code></pre>
+</section>
+
+<section>
+  <h2>Reusable D3</h2>
+  <h3>Making a Barchart plugin</h3>
+  <pre><code data-trim class="javascript code7">
+  // API VARIABLES
+  let transDuration = 2000
+  let title = null
+  let xField, yField
+  let xAxisTitle = null, yAxisTitle = null
+  let margin = {top:20, right:20, bottom:35, left:40}
+  </code></pre>
+</section>
+
+<section>
+  <h2>Reusable D3</h2>
+  <h3>Making a Barchart plugin</h3>
+  <pre><code data-trim class="javascript code7">
+      // DIMENSIONS
+      let chartHolder = d3.select(this)
+      let boundingRect = chartHolder.node().getBoundingClientRect()
+      let width = boundingRect.width - margin.left - margin.right,
+          height = boundingRect.height - margin.top - margin.bottom
+  </code></pre>
+</section>
+
+<section>
+  <h2>Reusable D3</h2>
+  <h3>Making a Barchart plugin</h3>
+  <pre><code data-trim class="javascript code7">
+      // SCALES
+      let xScale = d3.scaleBand()
+            .range([0, width])
+            .padding(0.1)
+      let yScale = d3.scaleLinear()
+            .range([height, 0])
+      // SET SCALE DOMAINS BASED ON DATA
+      xScale.domain( data.map(function(d) { return d[xField] }) )
+      yScale.domain([0, d3.max(data, function(d) { return +d[yField] })])
+  </code></pre>
+</section>
+
+<section>
+  <h2>Reusable D3</h2>
+  <h3>Making a Barchart plugin</h3>
+  <pre><code data-trim class="javascript code7">
+      // AXES
+      let xAxis = d3.axisBottom()
+            .scale(xScale)
+      let yAxis = d3.axisLeft()
+            .scale(yScale)
+  </code></pre>
+</section>
+
+<section>
+  <h2>Reusable D3</h2>
+  <h3>Making a Barchart plugin</h3>
+  <pre><code data-trim class="javascript code7">
+      // SVG CHARTHOLDER
+      let svg = chartHolder
+            .selectAll("svg")
+            .data([null]).enter()
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+  </code></pre>
+</section>
+
+<section>
+  <h2>Reusable D3</h2>
+  <h3>Making a Barchart plugin</h3>
+  <pre><code data-trim class="javascript code7">
+      // ADD AXES SVG GROUPS
+      svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+
+      svg.append("g")
+        .attr("class", "y axis")
+        .append("text")
+        .attr("id", "y-axis-label")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+  </code></pre>
+</section>
+
+<section>
+  <h2>Reusable D3</h2>
+  <h3>Making a Barchart plugin</h3>
+  <pre><code data-trim class="javascript code7">
+      // BUILD AXES
+      svg.select(".x.axis")
+        .transition().duration(transDuration)
+        .call(xAxis)
+        .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", ".15em")
+        .attr("transform", "rotate(-65)")
+
+      svg.select(".y.axis")
+        .transition().duration(transDuration)
+        .call(yAxis)
+
+      let yLabel = svg.select("#y-axis-label")
+      yLabel.text(yAxisTitle || yField)
+  </code></pre>
+</section>
+
+<section>
+  <h2>Reusable D3</h2>
+  <h3>Making a Barchart plugin</h3>
+  <pre><code data-trim class="javascript code7">
+      // BUILD BARS WITH AN UPDATE PATTERN
+      let bars = svg.selectAll(".bar")
+            .data(data, function(d) {
+              return d[yField]
+            })
+
+      bars.enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", 0)
+        .merge(bars)
+        .transition().duration(transDuration)
+        .attr("x", function(d) { return xScale(d[xField]) })
+        .attr("width", xScale.bandwidth())
+        .attr("y", function(d) { return yScale(d[yField]) })
+        .attr("height", function(d) { return height - yScale(d[yField]) })
+
+      bars.exit().remove()
+  </code></pre>
+</section>
+
+<section>
+  <h2>Reusable D3</h2>
+  <h3>Making a Barchart plugin</h3>
+  <pre><code data-trim class="javascript code7">
+  // CHAINABLE API METHODS
+  api.title = function(_title){
+    title = _title
+    return api
+  }
+
+  api.xField = function(_xField){
+    xField = _xField
+    return api
+  }
+
+  api.yField = function(_yField){
+    yField = _yField
+    return api
+  }
+  </code></pre>
+</section>
+
+<section>
+  <h2>Reusable D3</h2>
+  <h3>Making a Barchart plugin</h3>
+  <pre><code data-trim class="css code7">
+/* Barchart/index.css
+   import './index.css' */
+.barchart {
+  display: inline-block;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis--x path {
+  display: none;
+}
+  </code></pre>
+</section>
+
+<section>
+  <h2>Reusable D3</h2>
+  <h3>Making a Barchart plugin</h3>
+  <p>
+    You can call the barchart on selections produced by data joining:
+  </p>
+  <pre><code data-trim class="javascript code6">
+d3.tsv("data/letters.tsv")
+  .then((data) => {
+
+    let bc = Barchart()
+          .xField("letter")
+          .yField("frequency")
+
+    d3.select("#root")
+      .selectAll(".barchart")
+       // Divide the data array into two array, by index
+      .data([data.filter((d,i) => i%2), data.filter((d,i) => !(i%2))])
+      .enter()
+      .append("div")
+      .style("width", "400px")
+      .style("height", "400px")
+      .attr("class", "barchart")
+      .call(bc)
+  })
+  </code></pre>
+</section>
+
+<section>
+  <h2>Reusable D3</h2>
+  <h3>Making a Barchart plugin</h3>
+  <img src="media/images/uclBarchartDouble.png" class="" alt="" style="" />
+</section>
+
+<section>
+  <h2>Modern JS Dataviz</h2>
+  <h4>Key Benefits</h4>
+  <ul>
+    <li>Modular code base with <code>import</code></li>
+    <li>Rich node ecosystem</li>
+    <li>Most libraries a <code>yarn install</code> away</li>
+    <li>Full benefits of modern ES6+ without waiting for browser complience</li>
+    <li>Grown-up progamming context...</li>
+  </ul>
+  </p>
+</section>
+
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+        history: true,
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>

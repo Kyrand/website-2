@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+
+    {{ partial "header.html" . }}
+    <body>
+
+    {{ "<!-- Wrapper -->" | safeHTML }}
+        <div id="wrapper">
+
+            {{ partial "nav.html" . }}
+
+        {{ "<!-- Main -->" | safeHTML }}
+            <div id="main-post" class="alt">
+
+                <!-- One -->
+              <article id="one" class="post-container">
+                <div class="inner">
+                  {{ partial "single-content-post.html" . }}
+                </div>
+              </article>
+            {{ "<!-- Disqus Inject -->" | safeHTML }}
+                {{ if .Site.DisqusShortname }}
+                  {{ partial "disqus.html" . }}
+                {{ end }}
+            </div>
+
+        {{ "<!-- Footer -->" | safeHTML}}
+            {{ if .Site.Params.footer.enable }}
+                {{ partial "footer.html" . }}
+            {{ end }}
+        </div>
+
+    {{ "<!-- Scripts -->" | safeHTML}}
+        {{ partial "js.html" . }}
+
+    </body>
+</html>

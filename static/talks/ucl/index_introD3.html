@@ -1,0 +1,258 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="lib/css/kgd.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+      <div class="slides">
+
+        <section>
+          <h2>The Dataviz Toolchain</h2>
+          <h3>Transforming the data</h3>
+          <img src="media/images/toolchain_transform.png" class="" alt="" style="height: 400px" />
+        </section>
+
+        <section>
+          <h2>Why Learn D3?</h2>
+          <h3>Lots of alternative charting libraries</h3>
+          <ul>
+            <li>Highcharts</li>
+            <li>Google charts</li>
+            <li>Microsoft's PowerBI</li>
+            <li>ReCharts</li>
+            <li>TauCharts</li>
+            <li>C3.js</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Why Learn D3?</h2>
+          <h3>Lots of alternative charting libraries</h3>
+          <p>Many of them based on D3. Hmm...</p>
+          <ul>
+            <li>Highcharts</li>
+            <li>Google charts</li>
+            <li>Microsoft's PowerBI - D3 based</li>
+            <li>ReCharts - D3 based</li>
+            <li>TauCharts - D3 based</li>
+            <li>C3.js - D3 based</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Why Learn D3?</h2>
+          <blockquote>
+            D3 is much more than a charting library. It’s a library you use to
+build charting libraries, among other things.
+          </blockquote>
+        </section>
+
+        <section>
+          <h2>Why Learn D3</h2>
+          <p>
+            This means you can avoid the constraints and configurable dead-ends typically experienced with conventional charting libraries. These common frustrations were a key motivation for Mike Bostock creating D3.
+          </p>
+        </section>
+
+        <section>
+          <h2>Hacks We Have Known</h2>
+          <h3>Empowerment close to the metal</h3>
+          <video controls src="media/movies/govapp_labelclash.mp4" style='max-height:480px'></video>
+        </section>
+
+        <section>
+          <h2>Hacks We Have Known</h2>
+          <h3>Empowerment close to the metal</h3>
+          <video controls src="media/movies/govapp_nolabelclash.mp4" style='max-height:480px'></video>
+        </section>
+
+        <section>
+          <h2>Why We Learn D3</h2>
+          <p>Because the core concepts (see Grammar of Graphics) have been thought through D3 will tend to flow around problems that other visualization libraries, particularly charting libraries, ram headlong into.  The situation with GUI driven solutions like Tableau is usually considerably worse.
+        </section>
+
+        <section>
+          <h2>Why We Learn D3</h2>
+          <p>
+            If you're contemplating anything innovative in the (web-based) data visualization world, it's hard to beat the expressive power of D3.
+          </p>
+        </section>
+
+        <section>
+          <h2>D3 V4</h2>
+          <p>
+            D3 has gone <a href="https://github.com/d3/d3/blob/master/API.md">modular</a>. You can now use the chief branches of the library independently, with each being a minimally functional toolkit. Things like scales, map path generators, selectors etc. can now be used on their own and in any context you like.
+          </p>
+        </section>
+
+        <section>
+          <h2>D3 V4</h2>
+          <p>
+            So, for example, as many visualizations use the increased speed of a <code>canvas</code> or <code>WebGL</code> graphics context, you don't have to have any <code>DOM</code> specific utilities cluttering up the place
+          </p>
+        </section>
+
+        <section>
+          <h2>D3 V4</h2>
+          They can also be installed independently. Using the modern node way:
+          <pre><code class="text">
+yarn add d3-scale
+          </code></pre>
+          <p>Or using a <code>script</code> tag:</p>
+
+          <pre><code class="text">
+<script src="https://d3js.org/d3-scale.v1.min.js"></script>
+          </code></pre>
+
+        </section>
+
+        <section>
+          <h2>D3 v3 -> V4</h2>
+          <h2>Gotchas!</h2>
+          <p>
+            Moving to v4 means most of the thousands of D3 examples have to be updated:
+            <ul>
+              <li>Name space flattened <code>d3.geo.path</code> ↦ <code>d3.geoPath</code> (EASY)</li>
+              <li>The <code>enter</code> method doesn't now update the selection, breaking most examples of the all important update pattern. (HARD)</li>
+            </ul>
+          </p>
+        </section>
+
+        <!-- <section data-background-iframe='https://github.com/d3/d3/blob/master/API.md'>
+             </section> -->
+
+        <section>
+          <h2>Why We Learn D3</h2>
+          <p>
+            Without further ado, let's see what all the fuss is about...
+          </p>
+        </section>
+
+        <section>
+          <h2>Reddit Mike Bostock Q&A</h2>
+          <ul>
+            <li><a href="https://www.reddit.com/r/dataisbeautiful/comments/3k3if4/hi_im_mike_bostock_creator_of_d3js_and_a_former/cuufnzq/">What moment made you realize you had to create D3</a></li>
+            <li><a href="https://www.reddit.com/r/dataisbeautiful/comments/3k3if4/hi_im_mike_bostock_creator_of_d3js_and_a_former/cuufxp2/">Why D3 as popular as it is</a></li>
+            <li><a href="https://www.reddit.com/r/dataisbeautiful/comments/3k3if4/hi_im_mike_bostock_creator_of_d3js_and_a_former/cuugar7/">Favourite visualizations</a></li>
+            <li><a href="https://www.reddit.com/r/dataisbeautiful/comments/3k3if4/hi_im_mike_bostock_creator_of_d3js_and_a_former/cuufwyc/">Favourite visualization you've made</a></li>
+          </ul>
+        </section>
+
+
+        <section>
+          <h2>Useful Links</h2>
+          <ul>
+            <li>
+              <a href="https://github.com/d3/d3/blob/master/API.md">D3 v4</a>
+            </li>
+            <li>
+              <a href="https://medium.com/@mbostock/what-makes-software-good-943557f8a488">The new update pattern and explanation of changes</a>
+            </li>
+            <li><a href="http://archive.nytimes.com/www.nytimes.com/interactive/2012/11/02/us/politics/paths-to-the-white-house.htm">512 Paths to the White House</a></li>
+            <li>
+              <a href="http://d3indepth.com/">D3 in depth by Pete Cook</a>
+            </li>
+            <li>
+              <a href="https://d3js.org/">D3 dot org</a>
+            </li>
+            <li>
+              <a href="https://bl.ocks.org/mbostock">Blocks dot org. Bostock's blocks.</a>
+            </li>
+            <li>
+              <a href="https://bl.ocks.org/mbostock/3808218">General Update Pattern, I</a>
+            </li>
+            <li>
+              <a href="https://bl.ocks.org/mbostock/3808221">General Update Pattern, II</a>
+            </li>
+            <li>
+              <a href="https://bl.ocks.org/mbostock/3808234">General Update Pattern, III</a>
+            </li>
+            <li>
+              <a href="http://kyrandale.com/static/pyjsnobelviz/">The Book's Nobel Visualization</a>
+            </li>
+            <li>
+              <a href="http://almostobsolete.net/talks/d3/#/12">Tom Parslow's brilliant slideshow</a>
+            </li>
+            <li>
+              <a href="http://d3indepth.com/">D3 in depth by Pete Cook</a>
+            </li>
+          </ul>
+        </section>
+
+
+        <section>
+          <h2>Scale Changes v3 -> v4</h2>
+          <p>Pursuant to the great namespace flattening:</p>
+          <pre><code data-trim>
+    d3.scale.linear ↦ d3.scaleLinear
+    d3.scale.sqrt ↦ d3.scaleSqrt
+    d3.scale.pow ↦ d3.scalePow
+    d3.scale.log ↦ d3.scaleLog
+    d3.scale.quantize ↦ d3.scaleQuantize
+    d3.scale.threshold ↦ d3.scaleThreshold
+    d3.scale.quantile ↦ d3.scaleQuantile
+    d3.scale.identity ↦ d3.scaleIdentity
+    d3.scale.ordinal ↦ d3.scaleOrdinal
+    d3.time.scale ↦ d3.scaleTime
+          </code></pre>
+        </section>
+
+
+        <section>
+          <h2>Scale Changes v3 -> v4</h2>
+          <h3></h3>
+          <p>The ordinal.rangeBands and ordinal.rangeRoundBands methods have been replaced with a new subclass of ordinal scale: band scales.</p>
+          <pre><code data-trim>
+// The following code in 3.x:
+var x = d3.scale.ordinal()
+    .domain(["a", "b", "c"])
+    .rangeBands([0, width]);
+//Is equivalent to this in 4.0:
+var x = d3.scaleBand()
+    .domain(["a", "b", "c"])
+    .range([0, width]);
+          </code></pre>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+        history: true,
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>

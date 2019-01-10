@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="lib/css/kgd.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+      <div class="slides">
+
+        <section>
+          <h2>The Dataviz Toolchain</h2>
+          <h3>Transforming the data</h3>
+          <img src="media/images/toolchain_transform.png" class="" alt="" style="width:500px" />
+        </section>
+
+        <section>
+          <h2>The Great Namespace Flattening</h2>
+          <h3></h3>
+          <pre><code data-trim>
+// v3 ↦ v4
+d3.geo.equirectangular ↦ d3.geoEquirectangular
+d3.geo.conicEqualArea ↦ d3.geoConicEqualArea
+d3.geo.path ↦ d3.geoPath
+// etc..
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>The Update Pattern in Action</h2>
+          <h3></h3>
+          <pre><code data-trim>
+        // 1. JOIN MAP DATA TO THE COUNTRY PATHS USING THE NAME KEY
+        var countries = svg.select('.countries').selectAll('.country')
+            .data(mapData, function(d) {
+                return d.name;
+            });
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>The Update Pattern in Action</h2>
+          <h3></h3>
+          <pre><code data-trim style="max-height: 600px; font-size: 50%; line-height: 1.3em">
+        // 3. ENTER AND APPEND NEW COUNTRIES USING UNBOUND DATA
+        countries.enter()
+            .append('path')
+            .attr('class', 'country')
+            .on('mouseenter', function(d) {
+                // console.log('Entered ' + d.name);
+                d3.select(this).classed('active', true);
+
+            })
+            .on('mouseout', function(d) {
+                // console.log('Left ' + d.name);
+                d3.select(this).classed('active', false);
+            })
+        // 4. MERGE ANY DATA-BOUND COUNTRIES BACK
+        .merge(countries)
+        // 5. UPDATE ALL BOUND COUNTRIES, NEWLY APPENDED AND OLD
+            .attr('name', function(d) {
+                return d.name;
+            })
+            .classed('visible', true)
+            .transition().duration(nbviz.TRANS_DURATION)
+            .style('opacity', 1)
+            .attr('d', function(d) {
+                return path(d.geo);
+            });
+        // 6. REMOVE ANY UNBOUND COUNTRIES
+        countries.exit()
+            .classed('visible', false)
+            .transition().duration(nbviz.TRANS_DURATION)
+            .style('opacity', 0);
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>The Update Pattern in Action</h2>
+          <h3>v3 ↦ v4</h3>
+          <pre><code data-trim>
+// v3
+countries.enter()
+    .append()
+// ...
+;
+// reuse selector, now magically containing newly appended
+// and first selected elements
+countries.attr("name", function(d) {
+// ...
+// v4
+countries.enter()
+    .append()
+// ...
+  .merge(countries) // merge appended with original selection
+          </code></pre>
+        </section>
+
+        <!-- <section>
+             <h2>An Elephant in the Living-room</h2>
+             <img src="media/images/elephant.png" class="" alt="" style="" />
+             </section> -->
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+        history: true,
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>

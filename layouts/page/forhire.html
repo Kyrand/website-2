@@ -1,0 +1,25 @@
+
+{{ define "main" }}
+
+<div id="main-post" class="alt">
+
+  <article id="one" class="post-container">
+    <div class="inner">
+      {{ partial "single-content.html" . }}
+    </div>
+  </article>
+
+  {{ partial "worked-with.html" . }}
+
+  {{ "<!-- Disqus Inject -->" | safeHTML }}
+  {{ if .Site.DisqusShortname }}
+  {{ partial "disqus.html" . }}
+  {{ end }}
+</div>
+
+  {{ "<!-- Contact -->" | safeHTML}}
+  {{ if .Site.Params.Contact.enable }}
+  {{ partial "contact.html" . }}
+  {{ end }}
+
+{{ end }}

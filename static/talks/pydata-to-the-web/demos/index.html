@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+  h1 {color:red}
+</style>
+
+<div id='demo'></div>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+  d3.json('demo_data.json', function(error, data){
+      var demo = d3.select('#demo'),
+      messages = demo.selectAll('messages').data(data).enter();
+      messages.append('h1').html(function(d){ return d.title;});
+      messages.append('p').html(function(d){return d.body;});
+  });
+</script>
+
+
