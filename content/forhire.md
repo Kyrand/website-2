@@ -1,7 +1,7 @@
 ---
 title: "For Hire"
 date: 2018-12-21T21:41:01Z
-draft: true
+draft: false
 type: "page"
 layout: "forhire"
 categories:

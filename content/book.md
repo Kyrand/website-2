@@ -5,7 +5,7 @@ keywords: ""
 categories:
     - "pyjsbook"
 date: 2018-12-20T19:27:43Z
-draft: true
+draft: false
 ---
 
 <!-- ![pyjsbook](/img/pages/pyjsbook.png#center) -->
