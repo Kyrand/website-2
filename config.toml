@@ -59,6 +59,7 @@ paginate = 20
       name = "Home"
       url = "#"
 
+
     [[params.navigation.links]]
       name = "Hire Me!"
       url = "/forhire"
