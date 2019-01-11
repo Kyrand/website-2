@@ -17,6 +17,10 @@ body {
 }
 
 /* Index.html */
+#header {
+  background-color: #4c6f8b;
+}
+
 .front-page #worked-with {
   background: #4c6f8b;
   padding-top: 1.5rem;
@@ -61,6 +65,7 @@ article#pyjsbook {
 
 #contact {
   background-color: #4c6f8b;
+  border-top: solid 1px rgba(212, 212, 255, 0.1);
   //opacity: 0.85;
 }
 

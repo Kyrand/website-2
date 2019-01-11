@@ -8,7 +8,7 @@ categories:
     - "d3"
     - "javascript"
     - "dataviz"
-date: 2019-01-06T13:49:58Z
+date: 2019-01-07T13:49:58Z
 draft: false
 link: "/viz/static/expts/d3-smartphone-walking"
 ---

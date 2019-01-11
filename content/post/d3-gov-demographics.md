@@ -8,7 +8,7 @@ categories:
     - "d3"
     - "javascript"
     - "dataviz"
-date: 2019-01-06T13:49:58Z
+date: 2019-01-08T13:49:58Z
 draft: false
 link: "/viz/static/clients/gds/app/verify-survey.html"
 ---

@@ -16,7 +16,8 @@
     <h2>{{ $key }}</h2>
     <ul>
         {{ range first 10 $value.ByCount }}
-        <li><a href='{{ $.Site.BaseURL}}{{ $key }}/{{ (replace .Name "#" "%23") | urlize }}/' class="nav-link category">
+      <!-- <li><a href='{{ $.Site.BaseURL}}{{ $key }}/{{ (replace .Name "#" "%23") | urlize }}/' class="nav-link category"> -->
+          <li><a href='{{ printf "%s/%s/" $key   ( (replace .Name "#" "%23") | urlize ) | absURL }} ' class="nav-link category">
         {{ .Name }}
         <span class="badge badge-pill badge-secondary">{{ .Count }}</span>
         </a></li>

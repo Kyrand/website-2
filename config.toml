@@ -33,7 +33,7 @@ paginate = 20
 
   introDescription = '''<p> Hi, I'm a freelance web data visualisation consultant. I specialize in crafting bespoke visualisations using such libraries such as D3, THREEJS (WebGL), Vue, React, AFrame (WebVR) and many others. I can also do some backend hacking when required, with Python being my preferred go to. I cover some of this worflow in my O'Reilly book <a href="/book"> <em>Data Visualisation with  Python and JavaScript</em></a>. I also do in-house <a href="forhire#training"> training and workshops</a>. If you think I might be able to help you just <a href="#contact" class="scrolly">GET IN TOUCH</a>.'''
 
-  shortIntroDescription = '''<p> Hi, I'm a freelance web data visualisation consultant. I specialize in crafting bespoke visualisations using such libraries such as D3, THREEJS (WebGL), Vue, React, AFrame (WebVR) and many others. If you think I might be able to help you just <a href="#contact" class="scrolly">GET IN TOUCH</a>.'''
+  shortIntroDescription = '''<p> Hi, I'm a freelance web data visualisation consultant. I specialize in crafting bespoke visualisations using such libraries such as D3, THREEJS (WebGL), Vue, React, AFrame (WebVR) and many others. If you think I might be able to help you just <a href="/#contact" class="scrolly">GET IN TOUCH</a>.'''
 
   # Link custom assets relative to /static
   custom_css = ["css/kgd.css"]
