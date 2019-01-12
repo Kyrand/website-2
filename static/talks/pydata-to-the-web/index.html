@@ -73,7 +73,7 @@
         <!--   <video contruls src="media/videos/d3.webm" style='max-height:80%'> -->
         <!--   </video> -->
         <!-- </section> -->
-        
+
         <section>
           <h2>Why now is a good time to be doing this</h2>
           <ul>
@@ -85,7 +85,7 @@
              <li>It's fun... honestly</li>
           </ul>
         </section>
-        
+
         <section>
           <h2>Cool, random discovery for the day</h2>
           <h3>Courtesy of DLMF-NIST</h3>
@@ -124,7 +124,7 @@
           <pre><code data-trim class='js'>
 data = [
     {'title': 'foo', 'message': 'bar', (...)},
-    {'title': 'baz', 'message': 'qux', (...)}, ... 
+    {'title': 'baz', 'message': 'qux', (...)}, ...
 ]
           </code></pre>
           <h4>Avoid this sort of thing</h4>
@@ -136,7 +136,7 @@ data = {
           </code></pre>
         </section>
 
-        
+
         <section>
           <h2>JSON is the glue between Python and JS</h2>
           <img src='images/json-glue.png' />
@@ -191,7 +191,7 @@ Out[6]: {u'baa': {u'Hello': u'World!'}, u'foo': [1, 2, 3]}
 # and equivalent json.dump and json.dumps
           </code></pre>
         </section>
-        
+
         <section>
           <h2>PyData to Javascript: A Hello World</h2>
           <img src="images/files_helloworld.png" class="" alt="" style='max-height: 80%' />
@@ -215,7 +215,7 @@ json.dump(data, open('demo_data.json', 'w'))
 
 <div id='demo'></div>
 
-<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="https://d3js.org/d3.v3.min.js"></script>
 
 <script>
   d3.json('demo_data.json', function(error, data){
@@ -261,7 +261,7 @@ $ npm install http-server -g; http-server -p 8000             </code></pre>
 
 <svg id="chart"></svg>
 <div id='buttons'></div>
-<h4>json data from the '/api/&lt;id&gt;' call</h4> 
+<h4>json data from the '/api/&lt;id&gt;' call</h4>
 <div id='data'></div>
 
 &lt;script src="http://d3js.org/d3.v3.min.js">&lt;/script>
@@ -310,13 +310,13 @@ if __name__ == '__main__':
             <li>But basic elements fairly simple - important to understand them well...</li>
           </ul>
         </section>
-        
+
        <section>
          <h2>A Simple Barchart</h2>
          <iframe width='800px' height='600px' src="demos/simplechart/index.html"></iframe>
        </section>
 
-        
+
 <!--         <section> -->
 <!--           <h2>Our entry-point, index.html</h2> -->
 <!--           <pre><code class="html smallfont-80" data-trim> -->
@@ -350,7 +350,7 @@ if __name__ == '__main__':
 <!-- &lt;script src="static/simplechart.js">&lt;/script> -->
 <!-- &lt;script src="static/script.js">&lt;/script> -->
 <!--             </code></pre> -->
-          
+
 <!--         </section> -->
 
 <!--         <section> -->
@@ -462,7 +462,7 @@ var SimpleChart = function() {
 };
             </code></pre>
         </section>
-        
+
 
 
         <section>
@@ -482,7 +482,7 @@ var SimpleChart = function() {
           <h3>Using Angular Directives and Bootstrap to create control-panel with html</h3>
 
           <pre style='white-space:pre-wrap'><code class='html smallfont-80' data-trim>
-<chart-group dataURL='/static/data/test_data.json'> 
+<chart-group dataURL='/static/data/test_data.json'>
   <h2>Histograms and barcharts with menu-filter and chart-filter </h2>
   <filter-menu ng-if='data' data='data'></filter-menu>
   <div class='row'>
@@ -495,9 +495,9 @@ var SimpleChart = function() {
     <khist2d  data='data' class='col-md-4' xKey='product_family' yKey='foofactor'
           countKey='baacoefficient' activeAxes='true'></khist2d>
     <kpiechart class='col-md-3' data='data' col='type'></kpiechart>
-    <kbarchart class='col-md-3' data='data' col='product_family'></kbarchart> 
-    <kbarchart class='col-md-3' data='data' col='product_subgroup'></kbarchart> 
-    <kbarchart class='col-md-3' data='data' col='foofactor'></kbarchart> 
+    <kbarchart class='col-md-3' data='data' col='product_family'></kbarchart>
+    <kbarchart class='col-md-3' data='data' col='product_subgroup'></kbarchart>
+    <kbarchart class='col-md-3' data='data' col='foofactor'></kbarchart>
   </div>
 </chart-group></code><pre></section>
 
@@ -524,10 +524,10 @@ var SimpleChart = function() {
           <ul>
             <li>This talk and previous at <a href="http://kyrandale.com/talks">kyrandale.com/talks</a></li>
             <li>The simple bar-chart demonstrated, with annotation <a href='http://kyrandale.com/viz/static/expts/d3_simplechart/index.html'>http://kyrandale.com/viz/static/expts/d3_simplechart/index.html</a></li>
-            <li>The reactive chart demo at <a href="http://kyrandale/apps/#/bar-hist-demo">http://kyrandale/apps/#/bar-hist-demo</a> 
+            <li>The reactive chart demo at <a href="http://kyrandale/apps/#/bar-hist-demo">http://kyrandale/apps/#/bar-hist-demo</a>
             <li>Theta-function <a href="http://dlmf.nist.gov/21.4.F1i.webgl">http://dlmf.nist.gov/21.4.F1i.webgl</a></li>
             <li>The library that built it, with lots of cool demos <a href="www.x3dom.org">www.x3dom.org</a></li>
-            <li>The D3 motherloads: Gallery <a href="https://github.com/mbostock/d3/wiki/Gallery">https://github.com/mbostock/d3/wiki/Gallery</a>, github gists brought to life <a href="http://bl.ocks.org/mbostock">http://bl.ocks.org/mbostock</a></li>  
+            <li>The D3 motherloads: Gallery <a href="https://github.com/mbostock/d3/wiki/Gallery">https://github.com/mbostock/d3/wiki/Gallery</a>, github gists brought to life <a href="http://bl.ocks.org/mbostock">http://bl.ocks.org/mbostock</a></li>
             <li><a href="http://visualizing.org/">visualizing.org</a>, <a href="http://threejs.org/examples/">http://threejs.org/examples/</a></li>
           </ul>
         </section>
@@ -552,7 +552,7 @@ var SimpleChart = function() {
       width:1024,
       height:768,
       margin:0.025,
-      
+
 
       theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
       transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none

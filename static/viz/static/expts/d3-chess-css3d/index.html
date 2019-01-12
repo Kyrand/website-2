@@ -38,7 +38,7 @@
   z-index:999;
   <!-- margin:5px 0 10px 0; -->
   }
-  
+
   #buttons .btn{
   background-color:#333;
   border-color:#333;
@@ -69,7 +69,7 @@
   .cboard-select{
   text-align: center;
   }
-  
+
   .cboard-select svg{
   width:200px;
   height:200px;
@@ -117,7 +117,7 @@
   #gamedata .title{
   font-weight: bold;
   }
-  
+
   #info .big{
   font-size:24px;
   }
@@ -133,7 +133,7 @@
   width:100%;
   height:100%;
   }
-  
+
   #deathzone svg{
   width:100%;
   height:100%;
@@ -149,14 +149,14 @@
 <!--   <svg id='chart'></svg> -->
 <!-- </div> -->
 <body>
-  
+
 <style>
   #twitter_buttons{
   position:absolute;
   right:1%;
   top:1%;
   }
-</style> 
+</style>
 
 <div id='twitter_buttons'>
   <a href="https://twitter.com/kyran_dale" class="twitter-follow-button" data-show-count="false">Follow @kyran_dale</a>
@@ -190,12 +190,11 @@
 
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
   <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
-  <script type="text/javascript" src="/static/libs/jquery-extras/iframeResizer/js/iframeResizer.contentWindow.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
   <script src="lib/ICanHaz.min.js"></script>
   <script src="lib/minpubsub.js"></script>
-  <script src="http://d3js.org/d3.v3.min.js"></script>
-  <script src="http://d3js.org/topojson.v1.min.js"></script>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+  <script src="https://d3js.org/topojson.v1.min.js"></script>
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/three.js/r68/three.min.js"></script>
   <script src="lib/3js/renderers/CSS3DRenderer.js"></script>
@@ -221,7 +220,7 @@
       <div class="col-xs-4">{{col2}}</div>
     </div>
   </script>
-  
+
   <script id='scoresheet' type='text/html'>
     <div class='row' id='info'>
       <span >Move </span><span id='move-num'>{{moveNum}}</span>
@@ -247,7 +246,7 @@
     {{#plycount}}{{>datarow2}}{{/plycount}}
     {{#result}}{{>datarow2}}{{/result}}
   </script>
-  
+
   <script src="simpleviewer.js"></script>
   <script src="script.js"></script>
 
