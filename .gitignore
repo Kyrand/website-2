@@ -16,3 +16,6 @@ nosetests.xml
 
 # Node
 node_modules
+
+# Misc
+.*
