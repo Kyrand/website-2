@@ -10,6 +10,12 @@ body {
   }
 }
 
+@media screen and (max-width: 800px) {
+  body, input, select, textarea {
+    font-size: 12pt;
+  }
+}
+
 .clearfix::after {
   content: "";
   clear: both;
@@ -116,8 +122,15 @@ justify-content: center;
   display: -moz-flex;
   display: -webkit-flex;
   display: flex;
-  padding: 4em 1em 2em 1em;
+  flex-direction: row;
+  padding: 2em 1em 2em 1em;
   max-width: initial;
+}
+
+@media screen and (max-width: 800px) {
+  #main-post .post-container .inner {
+    flex-direction: column;
+  }
 }
 
 .post {
@@ -285,10 +298,16 @@ h2#worked-with {
   margin-bottom: 0;
 }
 
+.forhire img {
+  width: 100%;
+  max-width: 600px;
+}
+
 .logos {
   display: flex;
   justify-content: center;
   padding: 1.5rem 0 2.5rem;
+  flex-wrap: wrap;
 }
 
 .logo {

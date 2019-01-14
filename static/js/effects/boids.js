@@ -397,8 +397,8 @@ let birdFS = `
  var velocityUniforms;
  var birdUniforms;
 
- init();
- animate();
+  if(!init()) { return }
+  animate()
 
  function init() {
 
@@ -418,9 +418,12 @@ let birdFS = `
    renderer = new THREE.WebGLRenderer();
    renderer.setPixelRatio( window.devicePixelRatio );
    renderer.setSize( window.innerWidth, window.innerHeight );
-   container.appendChild( renderer.domElement );
 
-   initComputeRenderer();
+   if(!initComputeRenderer()) {
+     return false
+   }
+
+   container.appendChild( renderer.domElement )
 
    //stats = new Stats();
    //container.appendChild( stats.dom );
@@ -459,6 +462,7 @@ let birdFS = `
    // gui.close();
 
    initBirds();
+   return true;
 
  }
 
@@ -500,10 +504,11 @@ let birdFS = `
    var error = gpuCompute.init();
    if ( error !== null ) {
 
-     console.error( error );
-
+     console.error( error )
+     return false
    }
 
+   return true
  }
 
  function initBirds() {

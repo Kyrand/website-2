@@ -32,7 +32,7 @@ For more advanced visualizations and dashboards I can show how to leverage the p
 
 </div>
 
-{{< figure src="/img/book/toolchain.png" title="The Data-visualisation Toolchain" height="300" class="center-figure">}}
+{{< figure src="/img/book/toolchain.png" title="The Data-visualisation Toolchain" class="forhire center-figure">}}
 
 ## Dataviz audits {#dataviz-audits}
 
