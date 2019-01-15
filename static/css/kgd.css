@@ -127,16 +127,23 @@ justify-content: center;
   max-width: initial;
 }
 
-@media screen and (max-width: 800px) {
-  #main-post .post-container .inner {
-    flex-direction: column;
-  }
-}
-
 .post {
   padding-right: 2em;
   flex: 3;
 }
+
+@media screen and (max-width: 800px) {
+  #main-post .post-container .inner {
+    flex-direction: column;
+  }
+
+  .post {
+    padding-right: 0;
+    flex: 3;
+  }
+
+}
+
 
 .sidebar {
   flex: 1;
@@ -238,9 +245,9 @@ i.fa-twitter {
 }
 
 .image.main img {
-  width: initial;
-  height: 300px;
   margin: auto;
+  width: 100%;
+  max-width: 400px;
 }
 
 
