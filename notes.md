@@ -1,0 +1,3 @@
+## Resources
+Resize and compress animated gifs...
+- https://ezgif.com/resize/ezgif-5-1943fe0b640a.gif

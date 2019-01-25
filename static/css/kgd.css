@@ -54,6 +54,11 @@ body {
 
 
 /* Overwritten Forty styles */
+article {
+  max-width: 1280px;
+  margin: auto;
+}
+
 article#pyjsbook {
   background-size: contain;
 }
