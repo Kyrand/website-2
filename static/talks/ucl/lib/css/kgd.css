@@ -14,8 +14,12 @@
 {
     border: none;
     box-shadow: none;
-    max-height: calc(66vh);
+    max-height: calc(50vh);
     max-width: calc(66vw);
+}
+
+.img {
+  max-height: 500px;
 }
 /* .reveal p { */
 /*   display: block; */
