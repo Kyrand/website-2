@@ -1,0 +1,17 @@
+.box {
+  fill: blue;
+  stroke: black;
+  stroke-width: 2px;
+}
+
+#box2 {
+  fill: green;
+}
+
+#box3 {
+  fill: red;
+}
+
+.challenge {
+  background: #eee;
+}

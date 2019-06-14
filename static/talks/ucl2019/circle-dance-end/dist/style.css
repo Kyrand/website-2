@@ -1,0 +1,22 @@
+body {
+  padding: 50px;
+}
+
+.d3-challenge{
+/*   padding: 50px; */
+  margin: auto;
+  width: 400px;
+}
+
+svg {
+  overflow: visible;
+}
+
+.challenge {
+  background: #eee;
+}
+
+.buttons {
+  text-align: center;
+  margin-bottom: 20px;
+}

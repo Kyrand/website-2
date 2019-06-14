@@ -1,0 +1,27 @@
+.d3-challenge{
+  padding: 50px;
+  margin: auto;
+  width: 400px;
+}
+
+svg {
+  overflow: visible;
+}
+
+.box {
+  /* fill: blue; */
+  /* stroke: black; */
+  /* stroke-width: 2px; */
+}
+
+#box2 {
+  /* fill: green; */
+}
+
+#box3 {
+  /* fill: red; */
+}
+
+.challenge {
+  background: #eee;
+}

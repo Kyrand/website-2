@@ -1,0 +1,48 @@
+.root-flex-container {
+  display: flex;
+  /* margin:auto; */
+  height: 800px;
+}
+
+.flex-container {
+  display: flex;
+  background: green;
+  flex-wrap: wrap;
+  width: 800px;
+  /* height: 800px; */
+  /* margin: auto; */
+  /* flex-direction: column; */
+  /* flex-direction: row-reverse; */
+}
+
+.centered {
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-container > div {
+  background-color: #f1f1f1;
+  margin: 10px;
+  padding: 20px;
+  font-size: 30px;
+  /* flex: 1; */
+  /* min-width: 200px; */
+  /* min-height: 200px; */
+}
+
+.nested-flex-container {
+  display: flex;
+  flex-direction: column;
+  background: green;
+}
+
+.nested-flex-container > div {
+  background-color: #ccc;
+  margin: 10px;
+  padding: 20px;
+}
+
+#el3 {
+  /* flex: 2; */
+  width: 900px;
+}
