@@ -1,3 +1,6 @@
+# will be rebuilt by netlify
+public/
+
 *.py[cod]
 
 # C extensions

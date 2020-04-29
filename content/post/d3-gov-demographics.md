@@ -4,7 +4,7 @@ description: ""
 slug: ""
 image: "/img/viz/d3-gov-demographics.png"
 keywords: ""
-categories:
+tags:
     - "d3"
     - "javascript"
     - "dataviz"

@@ -4,7 +4,7 @@ description: ""
 slug: ""
 image: "/img/viz/uk-weather-stations.png"
 keywords: ""
-categories:
+tags:
     - "d3"
     - "javascript"
     - "dataviz"

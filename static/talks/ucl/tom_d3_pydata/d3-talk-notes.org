@@ -1,0 +1,222 @@
+
+
+Phantoms to Placeholders
+
+example of charitng library: high charts
+
+let -> var
+
+
+urls are great
+
+jupyter, bokeh, plotly
+
+
+dashboard example??
+
+
+tour of d3 features
+
+
+Intro to JS
+
+* What is D3? 2 min
+
+- Data Driven Documents
+- A JavaScript library for creating web-based interactive visualisations
+- Not a charting library, but you could build one with it
+
+* Why is it relavent to Python data people? 2 min
+
+- You have data, sometimes you want to show the world
+- The web is THE place to deliver content
+- Tools like Bokeh are extremely useful but if you need full control you must
+  JavaScript
+
+* Cool examples 3 min
+
+- https://d3js.org/ (click examples)
+- http://bl.ocks.org/
+- TODO: COOL EXAMPLES
+
+* D3 Hello World 3 min
+
+- hello.html (show on slide)
+- show result
+- looks a little like jquery, it is in some ways but also very differentl so try
+  to forget
+- in this example I'm selecting the container div and appending an h1 to it
+
+* SVG 3 min
+
+- D3 deals with DOM trees like HTML
+- But it also deals with SVG DOMs
+- SVG stands for Scalable Vector Graphics, it lets you produce vector drawings
+  by building up primitives such as circles, rectangles and paths.
+- show svg.html and result
+- So you can see SVG can be embeded in and looks very much like HTML, and just
+  like HTML it can also be manipulated by JavaScript through the document object
+  model
+
+* Selections 5 min
+
+- A core idea for D3 is selections
+- Lets you select multiple HTML or SVG elements and make changes to them
+- Example using svg.html
+
+d3.select('line').attr('stroke', 'pink');
+d3.select('.blue-circle').attr('r', 100);
+
+- You can select many items at once with selectAll, for example lets change both circles to be
+  yellow
+
+d3.selectAll('circle').attr('fill', 'yellow');
+
+
+* Transitions 3 min
+
+- A lot of the time you don't just want to change values, you want to animate
+  them
+
+d3.select('.red-circle').transition().duration(1000).attr('r', '100');
+
+- d3 understands colours and can transition between them
+
+d3.selectAll('circle').transition().duration(3000).attr('fill', 'pink');
+
+- There are loads of options to tweak transitions and you can even write custom
+  tweening functions for complete control.
+
+* Data binding 3 min
+
+- So far we've just been selecting an element or group of elements and doign the
+  same thing to them
+- But D3 is much more powerfull than that
+- You can use data binding to bind an array of data to elements you have selected
+
+let fibs = [1, 1, 2, 3, 5, 8, 13, 21, 34];
+let selection = d3.select('.fibs').selectAll('circle').data(fibs);
+selection.attr('r', (d,i) => d);
+
+- TODO: Diagram showing how binding works
+
+- The function you pass to attr can do anything it likes to the data, here I set
+  the color to blue for even numbers and yellow for odd.
+
+selection.attr('fill', (d,i) => (d % 2) ? 'blue' : 'yellow')
+
+- So for the r (radius) attribute we now supply a function that takes piece of
+  data assigned to that element and returns the value to use.
+
+selection.transition().duration(1000).attr('r', d => d*2);
+
+* Enters And Exits 10 min
+
+- That's great for updating existing elements, but what if we have more, or
+  less, data items than elements?
+- That's where the confusingly named "enters" and "exits" come in
+- Let's look at the case where you have more data than elements first.
+- So you make a selection, here there are only 4 elements but I have 9 elements
+  of the Fibonacci sequence.
+
+let fibs = [1, 1, 2, 3, 5, 8, 13, 21, 34];
+let selection = d3.select('.fibs').selectAll('circle').data(fibs);
+selection.attr('r', d => d);
+
+
+- By default this seems to ignore the remaining 5 elements, but actually d3 is
+  binding them to sort of phantom elements. You can access these phantom
+  elements using enter().
+
+let enter = selection.enter()
+
+- It doesn't make sense to set attributes on a phantom element, but you *can*
+  append an element to them. Then I can set attributes of that element
+
+enter.append('circle')
+  .attr('r', d => d)
+  .attr('cy', 150)
+  .attr('cx', (d,i) => 50 + i * 60)
+
+- And of course if I wanted to animated them in I'd just use transitions
+
+enter.append('circle')
+  .attr('r', 0)
+  .attr('cy', 150)
+  .attr('cx', 0)
+  .transition()
+  .duration(2000)
+  .attr('r', d => d)
+  .attr('cx', (d,i) => 50 + i * 60)
+
+
+- Now I've shown you the situation where I started with 4 elements but I wanted
+  9, but of course at the start you'll usuaully have 0 elements and want to
+  create them all, but it still all works the same
+  
+DEMO it again
+  
+- The other situation you'll sometimes have is you have more elements than data
+  items. In that situation you want to remove some of them, that's where the
+  "exit" selection comes in. The exit selection contains all the elements that
+  matched the selection but don't have a corresponding data item.
+
+fib = [1, 1, 2, 3, 5]
+selection = d3.select('.fibs').selectAll('circle').data(fibs);
+let exit = selection.exit();
+exit.remove()
+
+- We can also transition elements out, the remove command won't happen until the
+  animations have finished.
+
+fib = [1, 1, 2, 3, 5]
+selection = d3.select('.fibs').selectAll('circle').data(fibs);
+let exit = selection.exit();
+exit.transition().duration(2000).attr('r', 0).remove();
+
+* The Update Pattern
+
+- This all comes together to make the Update Pattern, which is the core of most
+  D3 visualisations. If you get the Update Pattern then you pretty much
+  understand D3.
+- The update pattern is to select a bunch of elements, bind some data then
+  1. Update existing elements with the data
+  2. Create new elements as needed with the enter selection
+  3. Remove old elements as needed with the exist selection
+- If you write the code to do this, then you can call it whenever the data
+  changes and it'll make whatever changes are needed, it'll work the first time
+  when there's no existing elements and it'll keep on working each time the data
+  changes.
+
+function dataChanged(data) {
+  let selection = d3.select('.fibs').selectAll('circle').data(data);
+  let enter = selection.enter()
+  let exit = selection.exit()
+  
+  selection.transition().attr('r', d => d);
+  
+  enter.append('circle')
+    .attr('r', 0)
+    .attr('cy', 150)
+    .attr('cx', 0)
+    .transition()
+    .duration(2000)
+    .attr('r', d => d)
+    .attr('cx', (d,i) => 50 + i * 60)
+  
+  exit.transition().attr('r', 0).remove();
+}
+
+dataChanged([])
+dataChanged(fibs)
+dataChanged([1,2,3,4,5])
+dataChanged([10,9,8,7,6,5,4,3,2,1])
+
+
+* Scales 2 min
+* Layouts 2 min
+** Force layout
+* Maps 2 min
+* Useful links
+
+http://animateddata.co.uk/lab/d3enterexit/

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Nobel-prize Visualisation (for book 'Data-visualisation with Python and JavaScript'</title>
+<!-- IMPORT THE VISUALISATIONS CSS STYLING -->
+<link rel="stylesheet" href="style.css" type="" media="screen" />
+<body>
+
+  <h1>UCL D3 Barchart Demo</h1>
+  <div id="barchart-ui">
+<!--     <button onclick="barchart.update(nobelData.full)">All Winners</button>
+    <button onclick="barchart.update(nobelData.physics)">Physics Winners</button> -->
+    <button onclick="updateWithRandomData()">Random filter</button>
+  </div>
+  <div id='nobel-bar'></div>
+  <div id='bar' class="barchart"></div>
+  <div id='scatter' class="barchart"></div>
+
+
+<!--   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.min.js"></script> -->
+  <script src="js/d3.min.js"></script>
+  <script src="js/nobelviz_bar.js"></script>
+  <script src="js/barchart.js"></script>
+  <script src="js/scatterplot.js"></script>
+  <script src="js/data.js"></script>
+  <script src="index.js"></script>
+
+</body>

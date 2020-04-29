@@ -4,7 +4,7 @@ description: ""
 slug: ""
 image: "/img/viz/d3-smartphone-walking.png"
 keywords: ""
-categories:
+tags:
     - "d3"
     - "javascript"
     - "dataviz"

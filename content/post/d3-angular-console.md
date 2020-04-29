@@ -4,7 +4,7 @@ description: ""
 slug: ""
 image: "/img/viz/d3-ang-bootstrap-console.png"
 keywords: ""
-categories:
+tags:
     - "d3"
     - "angular"
     - "javascript"

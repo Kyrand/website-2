@@ -4,7 +4,7 @@ description: ""
 slug: ""
 image: ""
 keywords: ""
-categories:
+tags:
     - "d3"
     - "javascript"
     - "observable"

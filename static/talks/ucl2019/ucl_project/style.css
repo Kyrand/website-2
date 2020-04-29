@@ -1,0 +1,53 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #fefefe;
+    width: 1000px;
+    margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+
+.barchart {
+  width: 600px;
+  height: 400px;
+  background: #eee;
+  margin: 0 auto;
+}
+
+/* BAR-CHART */
+.bar.active { fill:goldenrod; }
+.bar { fill: steelblue; }
+.bar:hover { fill: brown; }
+
+.axis { font: 10px sans-serif; }
+
+.axis-label{
+  fill: black;
+  stroke: none;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+/* .x.axis path { display: none; } */
+#y-axis-label { font-size: 11px }
+
+#barchart-ui {
+  text-align: center;
+  margin: 10px;
+}
+
+.point {
+  fill: green;
+  stroke: black;
+  stroke-width: 1px;
+}
