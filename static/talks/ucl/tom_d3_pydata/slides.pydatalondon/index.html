@@ -1,0 +1,1007 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Introduction to D3.JS</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="toastr.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <script src="examples/d3.min.js" charset="utf-8"></script>
+    <script src="topojson.v1.min.js"></script>
+
+    <style>
+     .running {
+       border: 1px solid green !important;
+     }
+
+     .error {
+       border: 2px solid red !important;
+     }
+
+
+     button.play {
+       position: absolute;
+       color: white;
+       top: -10px;
+       right: 0px;
+       padding: 20px;
+       background: transparent;
+       border: 0;
+       z-index: 99999;
+     }
+
+     button.play:before {
+       content: "\25B6";
+     }
+
+     button.resetSlide {
+       position: absolute;
+       right: 0;
+       top: 0;
+       color: white;
+       padding: 20px;
+       background: transparent;
+       border: 0;
+     }
+
+     .demo-dom {
+       width: 100%;
+     }
+
+     .demo-dom.floating {
+       position: fixed;
+       z-index: 999;
+       width: 100%;
+       top: 170px;
+       pointer-events: none;
+     }
+
+     .demo-dom.floating  .demo {
+       width: 50%;
+       float: left
+     }
+
+     .demo-dom.floating  .dom {
+       width: 50%;
+       float: right;
+       opacity: 0.8;
+       height: 300px;
+       background: black;
+     }
+
+     .demo svg {
+       margin: auto;
+       background: rgba(0,0,0,0.8);
+       max-width: 100%;
+     }
+
+
+     .dom {
+       text-align: left;
+       font-size: 21px !important;
+       font-family: monospace;
+     }
+
+     .dom .attr {
+       margin-left: 5px;
+       font-weight: normal !important;
+     }
+
+     .dom .tagName {
+       font-weight: bold !important;
+       color: white;
+     }
+
+      .dom .el > .close:before {
+       content: '</';
+       opacity: 0.3;
+     }
+
+     .dom .el > .open:before {
+       content: '<';
+       opacity: 0.3;
+     }
+
+     .dom .el > .open:after, .dom .el > .close:after {
+       content: '>';
+       opacity: 0.3;
+     }
+
+     .dom .selfClosing {
+       display: none;
+     }
+
+     .dom .children {
+       margin-left: 20px;
+     }
+
+     .addresses {
+       padding-top: 100px !important;
+       width: 100%;
+     }
+
+     .addresses .web > div {
+       width: 50%;
+       float: left;
+       margin-bottom: 50px;
+     }
+
+     .addresses .slidelink {
+       margin-bottom: 200px;
+     }
+
+     .reveal pre {
+       margin-top: 15px;
+       margin-left: auto;
+       margin-right: auto;
+     }
+
+     .reveal .slides {
+       margin-top: 0;
+     }
+    </style>
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section id="title">
+          <h2>Visualisations in D3.JS</h2>
+          <h3>Thomas Parslow</h3>
+          <!-- <div style="margin-top: 30px" ><small><center>Hit space to advance slides and automatically run code</center></small></div> -->
+          <!-- <div style="" ><small><center>Most code blocks are live, edit and hit &#x25b6; to run</center></small></div> -->
+          <div class="addresses">
+            <div class="slidelink">
+              <a href="http://almostobsolete/talks/d3/">almostobsolete.net/talks/d3/</a>
+            </div>
+            <div class="web">
+              <div><a href="http://twitter.com/almostobsolete">@almostobsolete</a></div>
+              <div><a href="https://tomparslow.co.uk">tomparslow.co.uk</a></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="index">
+          <h2>Coming up</h2>
+          <div class="fragment">
+          <ul>
+            <li><a href="#what-is-d3">What is D3.JS?</a></li>
+            <li><a href="#demos">Some cool stuff built with D3.JS</a></li>
+            <li><a href="#tour">A tour of features</a></li>
+            <li><a href="#dom">Detour: DOM and SVG</a></li>
+            <li><a href="#using">Building stuff with D3</a></li>
+          </ul>
+
+          <div style="margin-top: 30px" ><small><center>Most code blocks are live, edit and hit &#x25b6; to run</center></small></div>
+          <div style="" ><small><center>Hit space to advance slides and automatically run code</center></small></div>
+          </div>
+        </section>
+
+        <section id="what-is-d3">
+          <h2>What is D3.JS?</h2>
+          <ul class="fragment" >
+            <li><em>D</em>ata <em>D</em>riven <em>D</em>ocuments</li>
+            <li><em>JavaScript</em> library for building interactive visualizations</li>
+            <li><em>Not</em> a charting library, lower level than that</li>
+          </ul>
+        </section>
+
+        <section id="why-should-you-care">
+          <h2>Why should you care?</h2>
+          <ul class="fragment" >
+            <li>You have <em>data</em></li>
+            <li>The <em>web</em> is the place to show it</li>
+            <li><em>URLs</em> are great</li>
+            <li>To have complete control you need to use <em>JavaScript</em></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Options for showing data</h2>
+          <ul class="fragment">
+            <li>Python charting libraries (eg <a href="http://matplotlib.org/">Matplotlib</a>)</li>
+            <li>Python charting libraries that output HTML/JavaScript (eg <a href="http://bokeh.pydata.org/en/latest/">Bokeh</a>)</li>
+            <li>JavaScript charting libraries (eg <a href="http://www.highcharts.com/">Highcharts</a>)</li>
+            <li>Custom JavaScript</li>
+          </ul>
+        </section>
+
+        <!-- <section> -->
+        <!-- <h2>A possible workflow</h2> -->
+        <!-- <ul class="fragment" > -->
+        <!-- <li>Scrape data with Scrapy</li> -->
+        <!-- <li>Clean data with Pandas</li> -->
+        <!-- <li>Explore your data with Matplotlib</li> -->
+        <!-- <li>Serve your data with Flask</li> -->
+        <!-- <li>Display your data with D3</li> -->
+        <!-- </ul> -->
+        <!-- </section> -->
+
+        <section id="demos">
+          <section id="demos">
+            <h2>What can D3 do?</h2>
+          </section>
+
+
+          <section data-background-video="videos/nyt.webm" data-background-video-loop="true">
+            <h3><a target="_new" href="http://nyti.ms/WhmfT7">nyti.ms/WhmfT7</a></h3>
+          </section>
+
+          <section data-background-video="videos/nyt2.webm" data-background-video-loop="true">
+            <h3><a target="_new" href="http://nyti.ms/12UowUi">nyti.ms/12UowUi</a></h3>
+          </section>
+
+          <!-- <section data-background-video="videos/ml.webm" data-background-video-loop="true"> -->
+          <!-- <h3><a target="_new" href="http://www.r2d3.us/visual-intro-to-machine-learning-part-1/">r2d3.us/visual-intro-to-machine-learning-part-1/</a></h3> -->
+          <!-- </section> -->
+
+          <!-- <section data-background-video="videos/earth.webm" data-background-video-loop="true"> -->
+          <!-- <h3><a target="_new" href="https://earth.nullschool.net">earth.nullschool.net</a></h3>  -->
+          <!-- </section> -->
+
+          <section data-background-video="videos/polygraph.webm" data-background-video-loop="true">
+            <h3><a target="_new" href="http://polygraph.cool/history/">polygraph.cool/history/</a></h3>
+          </section>
+
+          <section data-background-video="videos/pluralsight.webm" data-background-video-loop="true">
+            <h3><a target="_new" style=""href="https://learn.pluralsight.com/resource/all-the-courses">learn.pluralsight.com<br>/resource/all-the-courses</a></h3>
+          </section>
+
+          <!-- <section data-background-video="videos/ilo.webm" data-background-video-loop="true"> -->
+          <!-- <h3><a target="_new" href="http://almostobsolete.net/demos/ilo/">almostobsolete.net/demos/ilo/</a></h3> -->
+          <!-- </section> -->
+
+          <section data-background-video="videos/examples.webm" data-background-video-loop="true">
+            <h2 style="color: black">Many More D3 Examples at</h2>
+            <h3><a target="_new" href="https://d3js.org/">d3js.org/</a></h3>
+          </section>
+        </section>
+
+          <!-- <section id="tour"> -->
+          <section id="tour">
+            <h2>A tour of D3</h2>
+          </section>
+
+          <section>
+            <h4>A tour of D3</h4>
+            <h2>DOM Manipulation</h2>
+
+            <pre><code class="fragment hljs html" data-trim data-noescape>
+&lt;div class="hello">
+  &lt;p>Hi PyData&lt;/p>
+&lt;/div></code></pre>
+
+            <pre><code class="fragment hljs html" data-trim data-noescape>
+&lt;svg>
+  &lt;circle r="10" cx="100" cy="100" fill="red">
+&lt;/svg> </code></pre>
+
+          </section>
+
+          <section>
+            <h4>A tour of D3</h4>
+            <h2>Data Binding</h2>
+            <div class="fragment">
+
+            <pre><code class="hljs json" data-trim data-noescape>
+[{"name": "Hydrogen", "atomic_number": 1},
+ {"name": "Helium",   "atomic_number": 2},
+ ...]</code></pre>
+            From data to corresponding elements
+            <pre><code class="hljs html" data-trim data-noescape>
+&lt;ul>
+  &lt;li> Hydrogen &lt;b>1&lt;/b> &lt;/li>
+  &lt;li> Helium &lt;b>2&lt;/b> &lt;/li>
+  ...
+&lt;/ul></code></pre>
+            </div>
+          </section>
+
+          <section id="tour-transitions">
+            <h4>A tour of D3</h4>
+            <h2>Transitions</h2>
+
+            <svg id="transitions-loop" width="600" height="200">
+              <circle fill="red" cx="300" cy="100" r="5"/>
+            </svg>
+          </section>
+
+          <section id="tour-scales">
+            <h4>A tour of D3</h4>
+            <h2>Scales</h2>
+
+            <svg id="scales-example" width="700" height="300" class="stretch" >
+
+            </svg>
+          </section>
+
+          <section id="tour-layouts">
+            <h4>A tour of D3</h4>
+            <h2>Layouts</h2>
+
+            <div id="force-directed-example">
+
+            </div>
+            <a href="http://bl.ocks.org/mbostock/1021953">bl.ocks.org/mbostock/1021953</a>
+          </section>
+
+          <section id="tour-mapping">
+            <h4>A tour of D3</h4>
+            <h2>Mapping</h2>
+
+            <div id="mapping-example">
+            </div>
+            <a href="https://bl.ocks.org/mbostock/ba63c55dd2dbc3ab0127">https://bl.ocks.org/mbostock/ba63c55dd2dbc3ab0127</a>
+          </section>
+
+          <!-- <section> -->
+          <!-- <h4>A tour of D3</h4> -->
+          <!-- <h2>Utilities</h2> -->
+
+          <!-- <ul class="fragment"> -->
+          <!-- <li>Array utilties</li> -->
+          <!-- <li>String utilties</li> -->
+          <!-- <li>Time utiltiies</li> -->
+          <!-- <li>Reading in JSON, CSV or XML data</li> -->
+          <!-- <li>Lots more</li> -->
+          <!-- </ul> -->
+          <!-- </section> -->
+          <!-- </section> -->
+
+          <!-- <section id="dom"> -->
+          <section id="dom">
+            <h3>Detour:</h3>
+            <h2>DOM: Document Object Model</h2>
+
+            <div class="fragment">
+            <pre><code data-slideinit class="hljs html" data-trim data-noescape contenteditable>
+&lt;html>
+  &lt;body>
+    &lt;h1>Hello PyData&lt;/h1>
+    &lt;p>So nice to be here&lt;/p>
+  &lt;/body>
+&lt;/html></code></pre>
+            <div class="demo" style="height: 250px" ></div>
+            </div>
+          </section>
+          <!-- </section> -->
+
+        <!-- SVG -->
+          <!-- <section id="svg"> -->
+          <section id="svg">
+            <h3>Detour:</h3>
+            <h2>SVG: Scalable Vector Graphics</h2>
+          </section>
+
+          <section>
+            <h2>SVG: Scalable Vector Graphics</h2>
+            <div class="demo" style="height: 250px" ></div>
+            <pre><code data-slideinit class="hljs html" data-trim data-noescape contenteditable>
+&lt;svg width="300" height="250">
+  &lt;circle fill="blue" cx="200" cy="100" r="50"/>
+&lt;/svg></code></pre>
+          </section>
+
+          <section>
+            <h2>SVG: Scalable Vector Graphics</h2>
+            <div class="demo" style="height: 250px" ></div>
+            <pre><code data-slideinit class="hljs html" data-trim data-noescape contenteditable>
+&lt;svg width="300" height="250">
+  &lt;line stroke="green"
+        stroke-width="4"
+        x1="200"
+        y1="100"
+        x2="300"
+        y2="200" />
+&lt;/svg></code></pre>
+          </section>
+
+          <section>
+            <h2>SVG: Scalable Vector Graphics</h2>
+            <div class="demo" style="height: 250px" ></div>
+            <pre><code data-slideinit class="hljs html" data-trim data-noescape contenteditable>
+&lt;svg width="300" height="250">
+  &lt;path stroke="purple"
+        stroke-width="4"
+        fill="none"
+        d="M10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80"/>
+&lt;/svg></code></pre>
+          </section>
+
+          <section>
+            <h2>SVG: Scalable Vector Graphics</h2>
+            <div class="demo" style="height: 250px" ></div>
+            <pre><code data-slideinit class="hljs html" data-trim data-noescape contenteditable>
+&lt;svg width="300" height="250">
+  &lt;circle fill="blue" cx="200" cy="100" r="50"/>
+  &lt;line stroke="green" stroke-width="4" x1="200" y1="100"
+          x2="300" y2="200" />
+  &lt;path stroke="purple" stroke-width="4" fill="none"
+          d="M10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80"/>
+  &lt;circle fill="red" cx="180" cy="200" r="50"/>
+&lt;/svg></code></pre>
+          </section>
+          <!-- </section> -->
+        <!-- END SVG -->
+
+        <section id="using">
+          <h2>How to use D3</h2>
+        </section>
+
+        <!-- <section id="hello-d3"> -->
+          <section id="hello-d3">
+            <h2>Hello D3</h2>
+          </section>
+
+          <section>
+            <h2>Hello D3</h2>
+            <button class="resetSlide">&#8635;</button>
+            <script type="text/demo">
+             <div id="container">
+             <small>Hello?</small>
+             </div>
+            </script>
+
+            <div class="demo-dom" data-fragment-index="70">
+              <code class="dom hljs html" style="height: 230px; overflow: scroll; background: black">
+              </code>
+              <div class="demo" style="min-height: 100px; border: 1px dashed grey; max-height: 150px; overflow: scroll">
+              </div>
+            </div>
+
+            <pre data-auto class="fragment hljs js"><code data-trim data-noescape contenteditable  >
+d3.select('#container')
+  .append('div')
+  .text('Hello world');</code></pre>
+          </section>
+          <!-- </section> -->
+
+
+        <!-- SELECTIONS -->
+          <!-- <section id="selections"> -->
+
+          <section id="selections">
+            <h2>Selections</h2>
+            <ul class="fragment">
+              <li>
+                The core of D3 is selecting items in the DOM and changing/removing/adding them
+              </li>
+              <li>
+                Selections are what allow this using CSS selector syntax
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Selections</h2>
+
+            <button class="resetSlide">&#8635;</button>
+            <script type="text/demo">
+             <svg width="300" height="250">
+               <circle class="myCircle" fill="blue" cx="70" cy="100" r="50"/>
+               <line stroke="green" stroke-width="4" x1="200" y1="50" x2="280" y2="200" />
+               <circle fill="red" cx="180" cy="180" r="50"/>
+             </svg>
+            </script>
+
+            <div class="demo-dom">
+              <div class="demo" style="float: left">
+              </div>
+              <code class="dom hljs html" style="height: 250px; background: black;">
+              </code>
+            </div>
+
+            <pre class="fragment" data-auto><code class="js" data-trim data-noescape contenteditable>d3.select('.myCircle').attr('r', 100);</code></pre>
+            <!-- <pre class="fragment" data-auto><code class="js" data-trim data-noescape contenteditable>d3.select('line').attr('stroke', 'pink');</code></pre> -->
+            <pre class="fragment" data-auto><code class="js" data-trim data-noescape contenteditable>d3.selectAll('circle').attr('fill', 'yellow');</code></pre>
+          </section>
+          <!-- </section> -->
+        <!-- END SELECTIONS -->
+
+        <!-- TRANSITIONS -->
+          <!-- <section id="transitions"> -->
+
+          <section id="transitions">
+            <h2>Transitions</h2>
+
+            <ul class="fragment">
+              <li>
+                Make changes as before, but with smooth transitions
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Transitions</h2>
+
+            <button class="resetSlide">&#8635;</button>
+            <script type="text/demo">
+             <svg width="300" height="250">
+               <circle class="myCircle" fill="blue" cx="70" cy="100" r="50"/>
+               <line stroke="green" stroke-width="4" x1="200" y1="50" x2="280" y2="200" />
+               <circle fill="red" cx="180" cy="180" r="50"/>
+             </svg>
+            </script>
+
+            <div class="demo-dom">
+              <div class="demo" style="float: left">
+              </div>
+              <code class="dom hljs html" style="height: 250px; background: black;">
+              </code>
+            </div>
+
+            <pre class="fragment" data-auto><code class="js" data-trim data-noescape contenteditable>d3.select('.myCircle')
+  .transition().duration(1000)
+  .attr('r', 100);</code></pre>
+            <pre class="fragment" data-auto><code class="js" data-trim data-noescape contenteditable>d3.selectAll('circle')
+  .transition().duration(3000)
+  .attr('fill', 'pink');</code></pre>
+          </section>
+          <!-- </section> -->
+        <!-- END TRANSITIONS -->
+
+        <!-- DATA BINDING -->
+          <!-- <section id="data-binding"> -->
+          <section id="data-binding">
+            <h2>Data Binding</h2>
+
+            <ul class="fragment">
+              <li>
+                Bind data and DOM elements together
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Data Binding</h2>
+
+            <button class="resetSlide">&#8635;</button>
+            <script type="text/demo">
+    <svg width="300" height="220">
+      <g class="circles">
+        <circle cx="50" cy="125"  r="1" fill="red"/>
+        <circle cx="110" cy="125" r="1" fill="red"/>
+        <circle cx="170" cy="125" r="1" fill="red"/>
+        <circle cx="230" cy="125" r="1" fill="red"/>
+      </g>
+    </svg>
+            </script>
+
+            <div class="demo-dom">
+              <div class="demo" style="float: left">
+              </div>
+              <code class="dom hljs html" style="height: 220px; background: black;">
+              </code>
+            </div>
+
+            <pre id="data-binding-1"><code class="js" data-trim data-noescape contenteditable>
+<div class="fragment">var data = [{myvalue: 20},{myvalue: 5},{myvalue: 40},{myvalue: 10}];</div>
+<div class="fragment">var selection = d3.select('.circles')
+                  .selectAll('circle')
+                  .data(data);</div>
+<div class="fragment" data-auto="#data-binding-1">selection.attr('r', function (d,i) { return d.myvalue; });</div><span style="display: none">
+  window.selection = selection</span></code></pre>
+
+            <!-- <pre><code class="fragment js" data-auto data-trim data-noescape contenteditable> -->
+<!-- selection.attr('fill', function (d,i) { -->
+<!-- return (i % 2) ? 'blue' : 'yellow'; -->
+<!-- })</code></pre> -->
+
+            <pre><code class="fragment js" data-auto data-trim data-noescape contenteditable>
+selection.transition().duration(5000)
+         .attr('cy', function (d,i) { return 40 + d.myvalue * 3; })</code></pre>
+
+          </section>
+          <!-- </section> -->
+        <!-- END DATA BINDING -->
+
+        <!-- ENTERS AND EXITS -->
+          <!-- <section id="enters-exits"> -->
+          <section id="enters-exits">
+            <h2>Enter and Exit Selections</h2>
+
+            <ul class="fragment">
+              <li>We've seen how to bind data existing elements</li>
+              <li>But what about when we have more data then elements (or vice versa)</li>
+              <li>Enter selections allow us to create addtional elements</li>
+              <li>Exit selections allow us to remove superfluous elements</li>
+              <li>Both support transitions</li>
+            </ul>
+          </section>
+
+
+          <section>
+            <h2>Enter Selections</h2>
+          </section>
+
+          <section>
+            <h2>Without Enter Selections</h2>
+
+
+            <button class="resetSlide">&#8635;</button>
+            <script type="text/demo">
+             <svg width="300" height="250">
+               <g class="circles">
+                 <circle cx="50" cy="125"  r="5" fill="red"/>
+                 <circle cx="110" cy="125" r="5" fill="red"/>
+               </g>
+             </svg>
+            </script>
+
+            <div class="demo-dom">
+              <div class="demo" style="float: left">
+              </div>
+              <code class="dom hljs html" style="height: 250px; background: black;">
+              </code>
+            </div>
+
+            <pre id="enter-selections-1"><code class="js fragment" data-trim data-noescape data-auto contenteditable>
+var data = [10, 20, 40, 50];
+
+var selection = d3.select('.circles')
+                  .selectAll('circle')
+                  .data(data);
+
+selection.attr('r', function (d,i) { return d; });</code></pre>
+
+          </section>
+
+          <section>
+            <h2>Enter Selections</h2>
+
+            <button class="resetSlide">&#8635;</button>
+            <script type="text/demo">
+             <svg width="300" height="220">
+               <g class="circles">
+                 <circle cx="50" cy="100"  r="5" fill="red"/>
+                 <circle cx="110" cy="100" r="5" fill="red"/>
+               </g>
+             </svg>
+            </script>
+
+            <div class="demo-dom">
+              <div class="demo" style="float: left; height: 220px">
+              </div>
+              <code class="dom hljs html" style="height: 220px; background: black;">
+              </code>
+            </div>
+
+            <pre id="enter-selections-2" data-slideinit><code class="js" data-trim data-noescape contenteditable>
+var data = [10, 20, 40, 50];
+var selection = d3.select('.circles')
+                  .selectAll('circle')
+                  .data(data);
+<div class="fragment">var enter = selection.enter();</div><span style="display: none" >
+  window.enter = enter;
+  window.selection = selection;
+</span></code></pre>
+
+            <pre><code class="fragment js" data-auto data-trim data-noescape contenteditable>
+enter.append('circle')
+  .attr('r', 5).attr('cy', 100).attr('fill', 'blue')
+  .attr('cx', function (d,i) { return 50 + i * 60; });
+</code></pre>
+
+            <!-- <pre><code class="fragment js" data-auto data-trim data-noescape contenteditable> -->
+<!-- selection.attr('r', function (d,i) { return d; });</code></pre> -->
+          </section>
+
+          <section>
+            <h2>No Existing Elements</h2>
+
+            <div class="fragment">
+
+            <button class="resetSlide">&#8635;</button>
+            <script type="text/demo">
+             <svg width="300" height="220">
+               <g class="circles">
+               </g>
+             </svg>
+            </script>
+
+            <div class="demo-dom">
+              <div class="demo" style="float: left; height: 220px">
+              </div>
+              <code class="dom hljs html" style="height: 220px; background: black;">
+              </code>
+            </div>
+
+            <pre data-slideinit><code class="js" data-trim data-noescape contenteditable>
+var data = [10, 20, 40, 50];
+var selection = d3.select('.circles')
+                  .selectAll('circle')
+                  .data(data);
+var enter = selection.enter();<span style="display: none" >
+  window.enter = enter;
+  window.selection = selection;
+</span></code></pre>
+
+            <pre><code class="fragment js" data-auto data-trim data-noescape contenteditable>
+enter.append('circle')
+  .attr('r', 10).attr('cy', 100).attr('fill', 'blue')
+  .attr('cx', function (d,i) { return 50 + i * 60;});
+</code></pre>
+
+            <!-- <pre><code class="fragment js" data-auto data-trim data-noescape contenteditable> -->
+<!-- selection.attr('r', function (d,i) {return d; });</code></pre> -->
+            </div>
+          </section>
+
+
+          <section>
+            <h2>Exit Selections</h2>
+          </section>
+
+          <section>
+            <h2>Without Exit Selections</h2>
+
+
+            <button class="resetSlide">&#8635;</button>
+            <script type="text/demo">
+             <svg width="300" height="220">
+               <g class="circles">
+                 <circle cx="50" cy="100"  r="5" fill="red"/>
+                 <circle cx="110" cy="100" r="5" fill="red"/>
+                 <circle cx="170" cy="100" r="5" fill="red"/>
+                 <circle cx="230" cy="100" r="5" fill="red"/>
+               </g>
+             </svg>
+            </script>
+
+            <div class="demo-dom">
+              <div class="demo" style="float: left; height: 220px">
+              </div>
+              <code class="dom hljs html" style="height: 220px; background: black;">
+              </code>
+            </div>
+
+            <pre id="exit-selections-1"><code class="js" data-trim data-noescape contenteditable>
+<div class="fragment">var data = [20, 30];
+var selection = d3.select('.circles')
+                  .selectAll('circle')
+                  .data(data);</div>
+<div class="fragment" data-auto="#exit-selections-1">selection.attr('r', function (d,i) { return d; });</div>
+</span></code></pre>
+          </section>
+
+          <section>
+            <h2>Exit Selections</h2>
+
+            <button class="resetSlide">&#8635;</button>
+            <script type="text/demo">
+             <svg width="300" height="220">
+               <g class="circles">
+                 <circle cx="50" cy="100"  r="5" fill="red"/>
+                 <circle cx="110" cy="100" r="5" fill="red"/>
+                 <circle cx="170" cy="100" r="5" fill="red"/>
+                 <circle cx="230" cy="100" r="5" fill="red"/>
+               </g>
+             </svg>
+            </script>
+
+            <div class="demo-dom">
+              <div class="demo" style="float: left; height: 220px">
+              </div>
+              <code class="dom hljs html" style="height: 220px; background: black;">
+              </code>
+            </div>
+
+            <pre id="exit-selections-2" data-slideinit><code class="js" data-trim data-noescape contenteditable>
+<div>var data = [20, 30];
+var selection = d3.select('.circles')
+                  .selectAll('circle')
+                  .data(data);</div>
+<div class="fragment">var exit = selection.exit();</div><span style="display: none" >
+  window.exit = exit;
+  window.selection = selection;
+</span></code></pre>
+
+            <pre><code class="fragment js" data-auto data-trim data-noescape contenteditable>
+exit.remove();
+</code></pre>
+
+            <!-- <pre><code class="fragment js" data-auto data-trim data-noescape contenteditable> -->
+<!-- selection.attr('r', function (d,i) { return d; });</code></pre> -->
+          </section>
+
+
+          <section>
+            <h2>Exit Selection Transitions</h2>
+
+            <div class="fragment">
+
+            <button class="resetSlide">&#8635;</button>
+            <script type="text/demo">
+             <svg width="300" height="220">
+               <g class="circles">
+                 <circle cx="50" cy="100"  r="20" fill="red"/>
+                 <circle cx="110" cy="100" r="20" fill="red"/>
+                 <circle cx="170" cy="100" r="20" fill="red"/>
+                 <circle cx="230" cy="100" r="20" fill="red"/>
+               </g>
+             </svg>
+            </script>
+
+            <div class="demo-dom">
+              <div class="demo" style="float: left; height: 220px">
+              </div>
+              <code class="dom hljs html" style="height: 220px; background: black;">
+              </code>
+            </div>
+
+            <pre id="exit-selections-3" data-slideinit><code class="js" data-trim data-noescape contenteditable>
+<div>var data = [20, 30];
+var selection = d3.select('.circles')
+                  .selectAll('circle')
+                  .data(data);
+var exit = selection.exit();</div><span style="display: none" >
+  window.exit = exit;
+  window.selection = selection;
+</span></code></pre>
+
+            <pre><code class="fragment js" data-auto data-trim data-noescape contenteditable>
+exit.transition().duration(5000)
+                 .attr('cy', -20)
+                 .style('opacity', 0)
+                 .remove();</code></pre>
+            </div>
+          </section>
+
+          <!-- </section> -->
+        <!-- END ENTERS AND EXITS -->
+
+        <!-- UPDATE PATTERN -->
+          <!-- <section> -->
+          <section>
+            <h2>The Update Pattern</h2>
+
+            <ul class="fragment">
+              <li>
+                A common pattern to create and update elements
+              </li>
+              <li>
+                Uses enter and exit selections
+              </li>
+              <li>
+                Plays nicely with transitions
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>The Update Pattern</h2>
+            <button class="resetSlide">&#8635;</button>
+            <script type="text/demo">
+              <svg width="600" height="300">
+                <g class="circles">
+                </g>
+              </svg>
+            </script>
+
+            <div class="demo-dom floating fragment" data-fragment-index="70">
+              <code class="dom hljs html">
+              </code>
+              <div class="demo" style="">
+              </div>
+            </div>
+
+
+            <pre><code data-trim data-noescape data-slideinit contenteditable>
+<span style="display: none">window.update = </span>function update(data) {
+<span class="fragment" data-fragment-index="10">  var selection = d3.select('.circles')
+                    .selectAll('circle')
+                    .data(data);</span>
+<span class="fragment" data-fragment-index="30">
+  selection.enter().append('circle')</span><span class="fragment"  data-fragment-index="40">
+    .attr('fill', 'red').attr('cy', 150)
+    <span class="fragment"  data-fragment-index="65">.attr('cx', 0).attr('r', 0)</span></span>
+
+<span class="fragment" data-fragment-index="50">  selection.exit()<span class="fragment"  data-fragment-index="65">.transition().duration(2000).attr('r', 0)</span>
+    .remove();</span><span class="fragment" data-fragment-index="60">
+
+  selection<span class="fragment"  data-fragment-index="65">.transition().duration(2000)</span>
+    .attr('r', function (d) { return d; })
+    .attr('cx', function (d,i) { return 50 + i * 60; }); </span>
+} </code></pre>
+
+            <pre class="fragment" data-auto data-fragment-index="90"><code class="js" data-trim data-noescape contenteditable>
+update([1, 1, 2, 3, 5, 8, 13]) </code></pre>
+            <pre class="fragment" data-auto data-fragment-index="100"><code class="js" data-trim data-noescape contenteditable>
+update([1,15,30,45]) </code></pre>
+            <pre class="fragment" data-auto data-fragment-index="110"><code class="js" data-trim data-noescape contenteditable>
+update([30,20,10,20,30]) </code></pre>
+            <pre class="fragment" data-auto data-fragment-index="120"><code class="js" data-trim data-noescape contenteditable>
+update([]) </code></pre>
+          </section>
+          <!-- </section> -->
+        <!-- END UPDATE PATTERN -->
+
+        <section>
+          <h2>Conclusion</h2>
+          <div class="fragment">
+            <ul>
+              <li>
+                Learn the update pattern, it's the core of D3
+              </li>
+              <li>
+                Look at examples at <a href="https://d3js.org/">d3js.org</a> and <a href="http://bl.ocks.org/">bl.ocks.org</a>
+              </li>
+              <li>New book out now by Kyran Dale</li>
+            </ul>
+            <a target="_new" href="https://www.amazon.co.uk/dp/1491920513"><img alt="Book Cover: Data Visualisation With Python & JavaScript" src="pyjs_dataviz_cover_correct.png" style="width: 300px"/></a>
+          </div>
+        </section>
+
+        <section>
+          <h2>Thanks for listening!</h2>
+          <h3>Thomas Parslow</h3>
+          <div class="addresses">
+            <div class="slidelink">
+              <a href="http://almostobsolete/talks/d3/">almostobsolete.net/talks/d3/</a>
+            </div>
+            <div class="web">
+              <div><a href="http://twitter.com/almostobsolete">@almostobsolete</a></div>
+              <div><a href="https://tomparslow.co.uk">tomparslow.co.uk</a></div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+        center: false,
+        keyboard: {
+          38: 'prev',
+          40: function () {
+            if(window.executeCurrentExample) {
+              window.executeCurrentExample();
+              window.executeCurrentExample = null;
+            } else {
+              Reveal.next();
+            }
+          }
+        },
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+
+
+    <script src="jquery.min.js" charset="utf-8"></script>
+    <script src="toastr.js" charset="utf-8"></script>
+    <script src="automatic-examples.js" charset="utf-8"></script>
+
+    <script src="http://static.getclicky.com/js" type="text/javascript"></script>
+    <script type="text/javascript">clicky.init(227423);</script>
+    <noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/227423ns.gif" /></p></noscript>
+  </body>
+</html>
