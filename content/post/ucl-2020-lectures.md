@@ -32,6 +32,20 @@ Some observations:
 
 I'm treating these lectures as a continuous block of time with tasks to be done. Online learning seems to be more intense and tiring than its real-world counterpart so we'll have regular breaks to recover and take stock.
 
+## Submission of projects
+Submission of projects as Jupyter notebooks and/or codepen (or other sandbox) 'pens' is encouraged but not mandatory.
+
+The work will be assessed on all programmatic aspects of the dataviz process, which include cleaning your data. The dirty truth of dataviz is that most datasets are full of errors and cleaning them a vital part of the process of dataviz. Pandas and Jupyter notebooks are a great way to do this (see Chapter 9 of my book for an example of the process).
+
+All of these will be assessed:
+
+- Cleaning datasets.
+- Exploring with Jupyter and chart libraries such as Matplotlib and Seaborn.
+- Static and Dynamic charts.
+- JavaScript charts/maps produced by Plotly, D3 etc.
+
+If you have any queries just send me an email.
+
 ## Task 1
 
 Objectives:
@@ -57,3 +71,24 @@ We'll then take that as a basis for an interactive Plotly chart that can be embe
 
 - Burn-Murdoch criticism of John Hopkins https://twitter.com/jburnmurdoch/status/1263062077213749250
 - Matplotlib line reference: https://matplotlib.org/gallery/lines_bars_and_markers/line_styles_reference.html
+
+## Task 2
+
+Objectives:
+
+- review the Covid-19 Jupyter notebook
+- look at Plotly and Mapbox maps
+- create a browser-based presentation using HTML, the Covid chart, maps and CSS flex-box
+- practice new skills with Brexit dataset..
+
+We'll aim to produce a rough chart-based web presentation using a couple of Covid-19 Plotly charts, learning basic web-dev practice as we go along:
+
+
+{{< figure src="/img/post/covid-plotly-web.png" title="FT Covid-19 Plotly chart and map" height="400" class="center-figure">}}
+
+### Resources
+
+- [Plotly Scatter Plots with Mapbox](https://plotly.com/python/scattermapbox/)
+- [Mapbox access tokens](https://docs.mapbox.com/help/glossary/access-token/)
+- [Flexboxes](https://www.w3schools.com/csS/css3_flexbox.asp)
+- [CSS cheatsheet](https://adam-marsden.co.uk/css-cheat-sheet)
