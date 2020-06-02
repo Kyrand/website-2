@@ -43,12 +43,24 @@ All of these will be assessed:
 - Exploring with Jupyter and chart libraries such as Matplotlib and Seaborn.
 - Static and Dynamic charts.
 - JavaScript charts/maps produced by Plotly, D3 etc.
+- ancillary/supplemental datasets fine, anything used in final visualization
 
 If you have any queries just send me an email.
 
-## Task 1
+## Last lecture
+There will probably be some free time in the last lecture and I'd like to give you an opportunity to choose a focus or two. Here are some options:
 
-Objectives:
+- Modern JS (node-based, modular imports, much improved syntax)
+- D3 in more depth
+- Demo of more varied Matplotlib chart in exploratory dataviz
+- Discussion of some general points about modern web dataviz
+- Some issues thrown up by your projects
+
+Feel free to vote by zoom message, send me an email, or open a group discussion on Moodle.
+
+## Tasks 1
+
+### Objectives:
 
 - craft a raw dataset into an insightful chart using Pandas and Matplotlib.
 - convert this chart to an embedded web chart using Python's Plotly library.
@@ -72,14 +84,14 @@ We'll then take that as a basis for an interactive Plotly chart that can be embe
 - Burn-Murdoch criticism of John Hopkins https://twitter.com/jburnmurdoch/status/1263062077213749250
 - Matplotlib line reference: https://matplotlib.org/gallery/lines_bars_and_markers/line_styles_reference.html
 
-## Task 2
+## Tasks 2
 
-Objectives:
+### Objectives:
 
 - review the Covid-19 Jupyter notebook
 - look at Plotly and Mapbox maps
 - create a browser-based presentation using HTML, the Covid chart, maps and CSS flex-box
-- practice new skills with Brexit dataset..
+- embed static image from Jupyter -> Dropbox -> Codepen
 
 We'll aim to produce a rough chart-based web presentation using a couple of Covid-19 Plotly charts, learning basic web-dev practice as we go along:
 
@@ -92,3 +104,24 @@ We'll aim to produce a rough chart-based web presentation using a couple of Covi
 - [Mapbox access tokens](https://docs.mapbox.com/help/glossary/access-token/)
 - [Flexboxes](https://www.w3schools.com/csS/css3_flexbox.asp)
 - [CSS cheatsheet](https://adam-marsden.co.uk/css-cheat-sheet)
+- [CSS Color Hex Codes](https://www.color-hex.com/)
+
+## Tasks 3
+
+### Objectives:
+
+- review the Plotly chart-based web presentation.
+- review flexboxes
+- intro to SVG with face challenge:
+- intro to D3 with D3 challenges
+- moving to Codepen project and out of Codepen sandbox
+- Getting and manipulating data in JS - the powerful functional methods, map, filter and reduce..
+
+### Resources
+
+- [Plotly charts](https://plotly.com/python/)
+- [Kaggle Datasets](https://www.kaggle.com/datasets?fileType=csv)
+- [SVG Visual Cheatsheet](http://www.cheat-sheets.org/own/svg/index.xhtml)
+- [Codepen UCL D3 Demo](https://codepen.io/kyrand/project/editor/ZMbqEL)
+- [UCL Codepen Collection](https://codepen.io/collection/XGyvyO)
+- [Codepen Projects](https://codepen.io/pro/projects/)
