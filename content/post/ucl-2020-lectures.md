@@ -125,3 +125,4 @@ We'll aim to produce a rough chart-based web presentation using a couple of Covi
 - [Codepen UCL D3 Demo](https://codepen.io/kyrand/project/editor/ZMbqEL)
 - [UCL Codepen Collection](https://codepen.io/collection/XGyvyO)
 - [Codepen Projects](https://codepen.io/pro/projects/)
+- [D3 enter and exit patterns](https://www.d3indepth.com/enterexit/)
