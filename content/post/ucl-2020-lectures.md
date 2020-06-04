@@ -114,8 +114,6 @@ We'll aim to produce a rough chart-based web presentation using a couple of Covi
 - review flexboxes
 - intro to SVG with face challenge:
 - intro to D3 with D3 challenges
-- moving to Codepen project and out of Codepen sandbox
-- Getting and manipulating data in JS - the powerful functional methods, map, filter and reduce..
 
 ### Resources
 
@@ -126,3 +124,20 @@ We'll aim to produce a rough chart-based web presentation using a couple of Covi
 - [UCL Codepen Collection](https://codepen.io/collection/XGyvyO)
 - [Codepen Projects](https://codepen.io/pro/projects/)
 - [D3 enter and exit patterns](https://www.d3indepth.com/enterexit/)
+- [Mike Bostock's Blocks](https://bl.ocks.org/mbostock)
+
+## Tasks 4
+
+- D3 recap - mastering the select functor
+- moving to Codepen project and out of Codepen sandbox
+- Getting and manipulating data in JS - the powerful functional methods, map, filter and reduce..
+- Using Plotly's JavaScript library with JavaScript
+
+### Codepens:
+[Selecting with D3](https://codepen.io/kyrand/pen/RwrwqJm)
+[D3 Dancing Boxes - start](https://codepen.io/kyrand/pen/WBVZgz?editors=1111)
+[Building Covid-19 Plotly presentation](https://codepen.io/kyrand/pen/eYJOJMq)
+[Data manipulation with JavaScript's functional methods, plotting the results with Plotly](https://codepen.io/kyrand/pen/ZNgrOo)
+
+### Resources
+- [Plotly JavaScript docs](https://plotly.com/javascript/)
