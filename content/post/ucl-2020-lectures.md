@@ -141,3 +141,12 @@ We'll aim to produce a rough chart-based web presentation using a couple of Covi
 
 ### Resources
 - [Plotly JavaScript docs](https://plotly.com/javascript/)
+
+## Tasks 5
+
+- Recap JS data manipulation
+- Loading data into a JS app
+- Using that data to make a chart, after filtering
+- [Covid-19 dataviz before](https://codepen.io/kyrand/pen/eYJOJMq?editors=1010)
+- [Covid-19 dataviz after](https://codepen.io/gordongilson/project/editor/DNgOev)
+- Questions about web dataviz, projects etc.
