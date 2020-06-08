@@ -157,11 +157,11 @@ We'll aim to produce a rough chart-based web presentation using a couple of Covi
 
 - Questions about web dataviz, projects etc.
 
-###
+### Resources
 
-[Python's geopy library](https://codepen.io/kyrand/pen/eYJOJMq?editors=1010)
-[Free static web publishing with Surge](https://surge.sh/)
-[Glitch - build full web apps for free](Uhttps://glitch.com/)
-[first-of-type CSS selector](https://developer.mozilla.org/en-US/docs/Web/CSS/:first-of-type)
-[Use of !important in CSS](https://www.lifewire.com/what-does-important-mean-in-css-3466876)
-[Plotly barcharts with JS](https://plotly.com/javascript/bar-charts/)
+- [Python's geopy library](https://codepen.io/kyrand/pen/eYJOJMq?editors=1010)
+- [Free static web publishing with Surge](https://surge.sh/)
+- [Glitch - build full web apps for free](Uhttps://glitch.com/)
+- [first-of-type CSS selector](https://developer.mozilla.org/en-US/docs/Web/CSS/:first-of-type)
+- [Use of !important in CSS](https://www.lifewire.com/what-does-important-mean-in-css-3466876)
+- [Plotly barcharts with JS](https://plotly.com/javascript/bar-charts/)
