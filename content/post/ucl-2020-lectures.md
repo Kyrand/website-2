@@ -144,9 +144,24 @@ We'll aim to produce a rough chart-based web presentation using a couple of Covi
 
 ## Tasks 5
 
+### Objectives
 - Recap JS data manipulation
 - Loading data into a JS app
 - Using that data to make a chart, after filtering
+- enhance our Covid-19 web presentation:
 - [Covid-19 dataviz before](https://codepen.io/kyrand/pen/eYJOJMq?editors=1010)
 - [Covid-19 dataviz after](https://codepen.io/gordongilson/project/editor/DNgOev)
+-- !NOTE! - remove specific sizing..
+-- remove or resize margins!
+- deployting to surge.sh (see http://ucl-covid-19-dataviz.surge.sh/)
+
 - Questions about web dataviz, projects etc.
+
+###
+
+[Python's geopy library](https://codepen.io/kyrand/pen/eYJOJMq?editors=1010)
+[Free static web publishing with Surge](https://surge.sh/)
+[Glitch - build full web apps for free](Uhttps://glitch.com/)
+[first-of-type CSS selector](https://developer.mozilla.org/en-US/docs/Web/CSS/:first-of-type)
+[Use of !important in CSS](https://www.lifewire.com/what-does-important-mean-in-css-3466876)
+[Plotly barcharts with JS](https://plotly.com/javascript/bar-charts/)
