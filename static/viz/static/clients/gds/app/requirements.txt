@@ -94,7 +94,7 @@ python-mimeparse==0.1.4
 python-qt==0.50
 python-slugify==0.1.0
 pytz==2016.4
-PyYAML==3.11
+PyYAML==5.4
 pyzmq==14.4.1
 qtconsole==4.1.1
 queuelib==1.4.2
