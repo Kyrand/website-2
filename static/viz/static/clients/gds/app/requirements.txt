@@ -83,7 +83,7 @@ pyasn1==0.1.9
 pyasn1-modules==0.0.8
 pycparser==2.14
 PyDispatcher==2.0.5
-Pygments==1.6
+Pygments==2.7.4
 pymongo==2.7.1
 pyOpenSSL==16.0.0
 pyparsing==2.0.3
