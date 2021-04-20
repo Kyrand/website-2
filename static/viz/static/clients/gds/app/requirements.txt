@@ -123,6 +123,6 @@ twitter==1.15.0
 Unidecode==0.4.16
 w3lib==1.15.0
 websocket==0.2.1
-Werkzeug==0.9.6
+Werkzeug==0.15.3
 xlrd==0.9.4
 zope.interface==4.2.0
