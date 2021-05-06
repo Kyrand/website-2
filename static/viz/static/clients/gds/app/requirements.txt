@@ -23,7 +23,7 @@ enum34==1.1.6
 Eve==0.4
 Events==0.2.1
 Flask==0.10.1
-Flask-Cors==1.10.2
+Flask-Cors==3.0.9
 Flask-HTTPAuth==2.4.0
 Flask-PyMongo==0.3.0
 Flask-RESTful==0.3.1
