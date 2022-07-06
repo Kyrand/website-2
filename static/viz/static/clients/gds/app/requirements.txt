@@ -53,7 +53,7 @@ jupyter==1.0.0
 jupyter-client==4.1.1
 jupyter-console==4.1.0
 jupyter-core==4.0.6
-lxml==3.6.1
+lxml==4.9.1
 Mako==1.0.0
 Markdown==2.5.1
 MarkupSafe==0.23
