@@ -7,7 +7,7 @@ bokeh==0.6.1
 brewer2mpl==1.4.1
 bugjar==0.1.0
 Cerberus==0.7.2
-certifi==14.5.14
+certifi==2022.12.7
 cffi==1.7.0
 characteristic==14.2.0
 click==5.1
